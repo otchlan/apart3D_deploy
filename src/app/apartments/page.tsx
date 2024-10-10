@@ -1,21 +1,149 @@
 "use client"
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import useApartments from '@/hooks/useApartments';
 import { Apartment } from '@/types/apartment-type';
-import View3D from '@/3d/View3D'
+import View3D from '@/3d/View3D';
+import Slider from '@/components/slider';
 
 const Apartments: React.FC = () => {
   const { apartments, loading, error } = useApartments();
+
+  // Filter state
+  const [filters, setFilters] = useState({
+    price: null,
+    roomsMin: null,
+    roomsMax: null,
+    floorMin: null,
+    floorMax: null,
+    field: null
+  });
+
+  // Slider min/max state
+  const [ranges, setRanges] = useState({
+    price: { min: 0, max: 1000000 },
+    roomsAmount: { min: 1, max: 10 },
+    floor: { min: 1, max: 20 },
+    field: { min: 0, max: 1000 }
+  });
+
+  // Calculate min/max values after fetching apartments data
+  useEffect(() => {
+    if (apartments.length > 0) {
+      const newRanges = {
+        price: {
+          min: Math.min(...apartments.map(apt => parseFloat(apt.Price))),
+          max: Math.max(...apartments.map(apt => parseFloat(apt.Price)))
+        },
+        roomsAmount: {
+          min: Math.min(...apartments.map(apt => parseInt(apt.RoomsAmount))),
+          max: Math.max(...apartments.map(apt => parseInt(apt.RoomsAmount)))
+        },
+        floor: {
+          min: Math.min(...apartments.map(apt => parseInt(apt.Floor))),
+          max: Math.max(...apartments.map(apt => parseInt(apt.Floor)))
+        },
+        field: {
+          min: Math.min(...apartments.map(apt => parseFloat(apt.Field))),
+          max: Math.max(...apartments.map(apt => parseFloat(apt.Field)))
+        }
+      };
+      setRanges(newRanges);
+    }
+  }, [apartments]);
+
+  // Handle filtering logic
+  const filteredApartments = apartments.filter((apartment: Apartment) => {
+    return (
+      (filters.price === null || parseFloat(apartment.Price) <= filters.price) &&
+      (filters.field === null || parseFloat(apartment.Field) <= filters.field) &&
+      (filters.roomsMin === null || parseInt(apartment.RoomsAmount) >= filters.roomsMin) &&
+      (filters.roomsMax === null || parseInt(apartment.RoomsAmount) <= filters.roomsMax) &&
+      (filters.floorMin === null || parseInt(apartment.Floor) >= filters.floorMin) &&
+      (filters.floorMax === null || parseInt(apartment.Floor) <= filters.floorMax)
+    );
+  });
+
+  const handleFilterChange = (filterName: string, value: number | null) => {
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      [filterName]: value
+    }));
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="flex flex-col container mx-auto px-4">
-      <div className='my-10 mx-auto'>
-        <View3D/>
+      {/*<div className="my-10 mx-auto">
+        <View3D />
       </div>
       <h1 className="text-3xl font-bold mb-6 text-center my-4">Apartments</h1>
+        */}
+      {/* Filter UI */}
+      <div className='text-xl text-center my-6'>
+        <b>Apartments</b>
+      </div>
+      <div className="flex space-x-4 mb-6 my-6">
+        <div className="w-1/4">
+          <Slider
+            min={ranges.price.min}
+            max={ranges.price.max}
+            value={filters.price}
+            label="Max Price"
+            onChange={(value) => handleFilterChange('price', value)}
+          />
+        </div>
+        <div className="w-1/4">
+          <Slider
+            min={ranges.field.min}
+            max={ranges.field.max}
+            value={filters.field}
+            label="Max Field Area"
+            onChange={(value) => handleFilterChange('field', value)}
+          />
+        </div>
+        <div className="w-1/4">
+          <label className="block mb-2">Rooms Amount</label>
+          <div className="flex space-x-2">
+            <input
+              type="number"
+              placeholder="Min"
+              value={filters.roomsMin || ''}
+              onChange={(e) => handleFilterChange('roomsMin', e.target.value ? Number(e.target.value) : null)}
+              className="w-1/2 px-2 py-1 border rounded"
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={filters.roomsMax || ''}
+              onChange={(e) => handleFilterChange('roomsMax', e.target.value ? Number(e.target.value) : null)}
+              className="w-1/2 px-2 py-1 border rounded"
+            />
+          </div>
+        </div>
+        <div className="w-1/4">
+          <label className="block mb-2">Floor</label>
+          <div className="flex space-x-2">
+            <input
+              type="number"
+              placeholder="Min"
+              value={filters.floorMin || ''}
+              onChange={(e) => handleFilterChange('floorMin', e.target.value ? Number(e.target.value) : null)}
+              className="w-1/2 px-2 py-1 border rounded"
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={filters.floorMax || ''}
+              onChange={(e) => handleFilterChange('floorMax', e.target.value ? Number(e.target.value) : null)}
+              className="w-1/2 px-2 py-1 border rounded"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Apartments Table */}
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto border-collapse border border-gray-300">
           <thead>
@@ -29,7 +157,7 @@ const Apartments: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {apartments.map((apartment: Apartment) => (
+            {filteredApartments.map((apartment: Apartment) => (
               <tr key={apartment.id} className="even:bg-gray-50">
                 <td className="px-4 py-2 border border-gray-300">{apartment.Building}</td>
                 <td className="px-4 py-2 border border-gray-300">{apartment.Floor}</td>
@@ -44,7 +172,6 @@ const Apartments: React.FC = () => {
       </div>
     </div>
   );
-  
 };
 
 export default Apartments;

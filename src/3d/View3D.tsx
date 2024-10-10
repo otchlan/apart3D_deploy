@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
+
 
 const View3D: React.FC = () => {
     const mountRef = useRef<HTMLDivElement | null>(null);
@@ -19,6 +23,8 @@ const View3D: React.FC = () => {
             const renderer = new THREE.WebGLRenderer({ antialias: true });
             const labelRenderer = new CSS2DRenderer();
             const controls = new OrbitControls(camera, renderer.domElement);
+            controls.minPolarAngle = Math.PI / 4;
+            controls.maxPolarAngle = Math.PI / 2.2;
 
             // Set the size of the renderer
             const width = 800;
@@ -34,56 +40,167 @@ const View3D: React.FC = () => {
             // Create cube parts
             const cubeGroup = new THREE.Group();
             const size = 0.5;
-            const gap = 0;
+            const gap = 0.05;
             const cubeParts: THREE.Mesh[] = [];
-            for (let x = 0; x < 2; x++) {
-                for (let y = 0; y < 2; y++) {
-                    for (let z = 0; z < 2; z++) {
-                        const geometry = new THREE.BoxGeometry(size, size, size);
-                        const material = new THREE.MeshPhongMaterial({ 
-                            color: 0xffffff,
-                            specular: 0x050505,
-                            shininess: 100
+
+            const group1 = new THREE.Group();
+
+            /*
+
+            const loader = new FBXLoader();
+            loader.setPath('/3d-objects/');
+            loader.load('FBX.fbx', (fbx) => {
+                fbx.position.set(1, 0, 20);
+                fbx.scale.set(0.005, 0.005, 0.005);
+            // Add the loaded FBX model to the scene
+            scene.add(fbx);
+            console.log('FBX Model Loaded:', fbx);
+
+            // Optionally animate the model (FBX models often come with animations)
+            fbx.traverse((child) => {
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+            });
+            */
+
+            const mtlLoader = new MTLLoader();
+            mtlLoader.setPath('/3d-objects/');  // Ustawienie ścieżki do folderu z plikami OBJ i MTL
+            mtlLoader.load('OBJMultiv2.mtl', (materials) => {
+                materials.preload();  // Preload materiałów
+            
+                // Następnie załaduj plik OBJ z wczytanymi materiałami
+                const objLoader = new OBJLoader();
+                objLoader.setMaterials(materials);  // Przypisz materiały z MTL
+                objLoader.setPath('/3d-objects/');  // Ustaw ścieżkę do folderu z plikiem OBJ
+                objLoader.load('OBJMultiv2.obj', (object) => {
+                    // Kiedy model zostanie załadowany, ustaw jego pozycję i skalę, a następnie dodaj do sceny
+                    object.position.set(-3.5, 0, 13);
+                    object.scale.set(1, 1, 1);
+                    scene.add(object);
+                    /*
+                    const mesh = scene.getObjectByName('Building3MultiObject')
+
+                    console.log(mesh)
+                    console.log(mesh instanceof THREE.Mesh)
+                    if (mesh instanceof THREE.Mesh) {
+                        // Clone the material to avoid affecting other objects using the same material
+                        mesh.material = Array.isArray(mesh.material)
+                            ? mesh.material.map((mat) => mat.clone())  // Clone each material if it's an array
+                            : mesh.material.clone();                   // Clone the single material
+                    
+                        const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+                    
+                        materials.forEach((material, index) => {
+                            // Check if the material has a color property
+                            if ((material as THREE.MeshBasicMaterial).color) {
+                                (material as THREE.MeshBasicMaterial).color.set(0xff0000);  // Set color to red
+                            } else {
+                                console.error(`Material ${index} does not have a color property.`);
+                            }
                         });
-                        const cubePart = new THREE.Mesh(geometry, material);
-                        cubePart.position.set(
-                            x * (size + gap) - (size + gap) / 2,
-                            y * (size + gap) - (size + gap) / 2,
-                            z * (size + gap) - (size + gap) / 2
-                        );
-                        cubePart.userData = { 
-                            partId: `${x}-${y}-${z}`,
-                            originalColor: material.color.getHex()
-                        };
-                        cubeGroup.add(cubePart);
-                        cubeParts.push(cubePart);
+                    } else {
+                        console.error('The object is not a mesh or was not found.');
+                    }
+                        */
+                }, 
+                (xhr) => {
+                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');  // Procent ładowania
+                }, 
+                (error) => {
+                    console.error('An error happened while loading the OBJ', error);
+                });
+            });
+
+            // Load textures with error handling
+            const textureLoader = new THREE.TextureLoader();
+            const loadTexture = (url: string) => {
+                return new Promise<THREE.Texture>((resolve) => {
+                    textureLoader.load(
+                        url,
+                        (texture) => resolve(texture),
+                        undefined,
+                        () => {
+                            console.error(`Failed to load texture: ${url}`);
+                            resolve(new THREE.Texture()); // Return a default texture
+                        }
+                    );
+                });
+            };
+
+            Promise.all([
+                loadTexture('/wood-texture.jpg'),
+                loadTexture('/metal-texture.jpg')
+            ]).then(([woodTexture, metalTexture]) => {
+                for (let x = 0; x < 2; x++) {
+                    for (let y = 0; y < 2; y++) {
+                        for (let z = 0; z < 2; z++) {
+                            const geometry = new THREE.BoxGeometry(size, size, size);
+                            const material = new THREE.MeshStandardMaterial({ 
+                                map: x % 2 === 0 ? woodTexture : metalTexture,
+                                metalness: x % 2 === 0 ? 0.2 : 0.8,
+                                roughness: x % 2 === 0 ? 0.8 : 0.2,
+                            });
+                            const cubePart = new THREE.Mesh(geometry, material);
+                            cubePart.position.set(
+                                x * (size + gap) - (size + gap) / 2,
+                                y * (size + gap) - (size + gap) / 2,
+                                z * (size + gap) - (size + gap) / 2
+                            );
+                            cubePart.userData = { 
+                                partId: `${x}-${y}-${z}`,
+                                originalMetalness: material.metalness,
+                                originalRoughness: material.roughness
+                            };
+                            cubeGroup.add(cubePart);
+                            cubeParts.push(cubePart);
+                        }
                     }
                 }
-            }
-            scene.add(cubeGroup);
+                //scene.add(cubeGroup);
+            });
 
-            // Add lighting
-            const ambientLight = new THREE.AmbientLight(0x404040);
+            // Improved lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
             scene.add(ambientLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-            directionalLight.position.set(1, 1, 1);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 5, 5);
+            directionalLight.castShadow = true;
             scene.add(directionalLight);
 
-            // Create a green flat surface
-            const planeGeometry = new THREE.PlaneGeometry(10, 10);
-            const planeMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-            plane.rotation.x = - Math.PI / 2;
-            plane.position.y = -0.5; // Move the plane down a bit
-            scene.add(plane);
+            const pointLight = new THREE.PointLight(0xff9000, 1, 10);
+            pointLight.position.set(-2, 1, 2);
+            scene.add(pointLight);
 
-            // Create a sky background
-            const skyColor = new THREE.Color(0x87CEEB);
-            scene.background = skyColor;
+            // Create an enhanced ground
+            loadTexture('/grass-texture.jpg').then((groundTexture) => {
+                groundTexture.wrapS = THREE.RepeatWrapping;
+                groundTexture.wrapT = THREE.RepeatWrapping;
+                groundTexture.repeat.set(10, 10);
+
+                const planeGeometry = new THREE.PlaneGeometry(40, 20);
+                const planeMaterial = new THREE.MeshStandardMaterial({ 
+                    map: groundTexture,
+                    roughness: 0.8,
+                    metalness: 0.2
+                });
+                const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+                plane.rotation.x = - Math.PI / 2;
+                plane.position.y = -0.5;
+                plane.position.x = 2;
+                plane.receiveShadow = true;
+                scene.add(plane);
+            });           
+
+            // Create a simple colored background instead of skybox
+            scene.background = new THREE.Color(0x87CEEB); // Sky blue color
 
             // Set the camera position
-            camera.position.set(3, 3, 3);
-            camera.lookAt(cubeGroup.position);
+            camera.position.set(20, 3, 20);
+            camera.lookAt(0, 0, 0);
             controls.update();
 
             // Update camera aspect ratio
@@ -94,60 +211,119 @@ const View3D: React.FC = () => {
             const raycaster = new THREE.Raycaster();
             const mouse = new THREE.Vector2();
 
-            let hoveredPart: THREE.Mesh | null = null;
+            const isMaterialWithColor = (material: THREE.Material): material is THREE.Material & { color: THREE.Color } => {
+                return 'color' in material && material.color instanceof THREE.Color;
+            };
+            
 
-            // Handle mouse move for hover effect
+            let hoveredPart: THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap> | null = null;
+
             const onMouseMove = (event: MouseEvent) => {
                 const rect = mountRef.current!.getBoundingClientRect();
                 mouse.x = ((event.clientX - rect.left) / width) * 2 - 1;
                 mouse.y = -((event.clientY - rect.top) / height) * 2 + 1;
 
                 raycaster.setFromCamera(mouse, camera);
-                const intersects = raycaster.intersectObjects(cubeParts);
 
-                // Reset previously hovered part
+                const buildingNames = ['Building1MultiObject', 'Building2MultiObject', 'Building3MultiObject', 'Building4MultiObject', 'Building5MultiObject'];
+                const buildingObjects = buildingNames.map(name => scene.getObjectByName(name)).filter(Boolean) as THREE.Mesh[];
+
+                const intersects = raycaster.intersectObjects(buildingObjects);
+
                 if (hoveredPart) {
-                    (hoveredPart.material as THREE.MeshPhongMaterial).color.setHex(hoveredPart.userData.originalColor);
-                    hoveredPart.scale.set(1, 1, 1);
+                    resetHoveredPart(hoveredPart);
+                    hoveredPart = null;
                 }
 
                 if (intersects.length > 0) {
                     const intersectedObject = intersects[0].object as THREE.Mesh;
-                    const partId = intersectedObject.userData.partId;
-                    
-                    // Highlight the hovered part
-                    (intersectedObject.material as THREE.MeshPhongMaterial).color.setHex(0xffff00); // Yellow highlight
-                    intersectedObject.scale.set(1.1, 1.1, 1.1); // Slightly enlarge the part
-                    hoveredPart = intersectedObject;
-
-                    // Calculate popup position
-                    const popupWidth = 100; // Approximate width of the popup
-                    const popupHeight = 30; // Approximate height of the popup
-                    const margin = 10; // Margin from the cursor
-                    
-                    let popupX = event.clientX - rect.left - popupWidth - margin;
-                    let popupY = event.clientY - rect.top;
-
-                    // Ensure the popup stays within the component bounds
-                    if (popupX < 0) popupX = margin;
-                    if (popupX + popupWidth > width) popupX = width - popupWidth - margin;
-                    if (popupY + popupHeight > height) popupY = height - popupHeight - margin;
-
-                    setPopup({
-                        visible: true,
-                        content: `Cube Part: ${partId}`,
-                        position: {
-                            x: popupX,
-                            y: popupY
-                        }
-                    });
+                    if (intersectedObject instanceof THREE.Mesh) {
+                        setHoveredPart(intersectedObject);
+                        const buildingName = intersectedObject.name;
+                        showPopup(event, rect, buildingName);
+                    }
                 } else {
-                    hoveredPart = null;
                     setPopup(prev => ({ ...prev, visible: false }));
                 }
             };
 
+            const resetHoveredPart = (part: THREE.Mesh) => {
+                const materials = Array.isArray(part.material) ? part.material : [part.material];
+
+                materials.forEach((material) => {
+                    if (isMaterialWithColor(material) && part.userData.originalColor !== undefined) {
+                        material.color.set(part.userData.originalColor);
+                    }
+                    if (part.userData.originalOpacity !== undefined) {
+                        material.opacity = part.userData.originalOpacity;
+                        material.transparent = part.userData.originalOpacity < 1;
+                    }
+                });
+
+            };
+
+            const setHoveredPart = (part: THREE.Mesh) => {
+
+                const materials = Array.isArray(part.material) ? part.material : [part.material];
+
+                materials.forEach((material, index) => {
+                    const clonedMaterial = material.clone();
+                    
+                    if (part.userData.originalMaterials === undefined) {
+                        part.userData.originalMaterials = materials;
+                    }
+
+                    if (isMaterialWithColor(clonedMaterial)) {
+                        if (part.userData.originalColor === undefined) {
+                            part.userData.originalColor = clonedMaterial.color.getHex();
+                        }
+                        clonedMaterial.color.set(0xff0000);
+                    }
+
+                    if (part.userData.originalOpacity === undefined) {
+                        part.userData.originalOpacity = clonedMaterial.opacity;
+                    }
+
+                    if (Array.isArray(part.material)) {
+                        part.material[index] = clonedMaterial;
+                    } else {
+                        part.material = clonedMaterial;
+                    }
+                });
+
+                hoveredPart = part;
+            };
+            
+            // Function to show popup
+            const showPopup = (event: MouseEvent, rect: DOMRect, buildingName: string) => {
+                const popupWidth = 100;
+                const popupHeight = 30;
+                const margin = 10;
+            
+                let popupX = event.clientX - rect.left - popupWidth - margin;
+                let popupY = event.clientY - rect.top;
+            
+                if (popupX < 0) popupX = margin;
+                if (popupX + popupWidth > width) popupX = width - popupWidth - margin;
+                if (popupY + popupHeight > height) popupY = height - popupHeight - margin;
+            
+                setPopup({
+                    visible: true,
+                    content: `Object: ${buildingName}`,
+                    position: {
+                        x: popupX,
+                        y: popupY
+                    }
+                });
+            };
+            
+            // Add event listener for mouse movement
             window.addEventListener('mousemove', onMouseMove);
+
+            
+
+            
+            
 
             // Handle window resize
             const handleResize = () => {
@@ -162,6 +338,7 @@ const View3D: React.FC = () => {
             const animate = () => {
                 requestAnimationFrame(animate);
                 controls.update();
+
                 renderer.render(scene, camera);
                 labelRenderer.render(scene, camera);
             };
