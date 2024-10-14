@@ -5,9 +5,10 @@ import Image, { StaticImageData } from 'next/image';
 type CarouselProps = {
   images: { src: StaticImageData; width: number; height: number }[];
   visibleItems?: number;
+  height?: string | number; // New prop to regulate height
 };
 
-const Carousel: React.FC<CarouselProps> = ({ images, visibleItems = 1 }) => {
+const Carousel: React.FC<CarouselProps> = ({ images, visibleItems = 1, height = '300px' }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const maxIndex = Math.max(0, images.length - visibleItems);
@@ -35,17 +36,23 @@ const Carousel: React.FC<CarouselProps> = ({ images, visibleItems = 1 }) => {
   }, [nextSlide]);
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div 
+      className="relative w-full overflow-hidden" 
+      style={{ height: typeof height === 'number' ? `${height}px` : height }}
+    >
       {/* Slides */}
       <div 
         className="flex transition-transform duration-500 ease-in-out" 
-        style={{ transform: `translateX(-${currentIndex * (100 / visibleItems)}%)` }}
+        style={{ 
+          transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`,
+          height: '100%' // Ensure slides take full height of the container
+        }}
       >
         {images.map((image, index) => (
           <div
             key={index}
             className="flex-shrink-0"
-            style={{ width: `${100 / visibleItems}%` }}
+            style={{ width: `${100 / visibleItems}%`, height: '100%' }} // Ensure each slide takes full height
           >
             <Image
               src={image.src}
@@ -61,13 +68,19 @@ const Carousel: React.FC<CarouselProps> = ({ images, visibleItems = 1 }) => {
       {/* Left and Right buttons */}
       <button
         onClick={prevSlide}
-        className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full hover:bg-gray-800 ${currentIndex === 0 && 'hidden'}`}
+        className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full hover:bg-gray-800 ${
+          currentIndex === 0 ? 'hidden' : ''
+        }`}
+        aria-label="Previous Slide"
       >
         ‹
       </button>
       <button
         onClick={nextSlide}
-        className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full hover:bg-gray-800 ${currentIndex === maxIndex && 'hidden'}`}
+        className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full hover:bg-gray-800 ${
+          currentIndex === maxIndex ? 'hidden' : ''
+        }`}
+        aria-label="Next Slide"
       >
         ›
       </button>

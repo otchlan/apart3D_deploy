@@ -74,79 +74,83 @@ const Apartments: React.FC = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="flex flex-col container mx-auto px-4">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-purple-50">
       {/*<div className="my-10 mx-auto">
         <View3D />
       </div>
       <h1 className="text-3xl font-bold mb-6 text-center my-4">Apartments</h1>
         */}
       {/* Filter UI */}
-      <div className='text-xl text-center my-6'>
-        <b>Apartments</b>
-      </div>
-      <div className="flex space-x-4 mb-6 my-6">
-        <div className="w-1/4">
-          <Slider
-            min={ranges.price.min}
-            max={ranges.price.max}
-            value={filters.price}
-            label="Max Price"
-            onChange={(value) => handleFilterChange('price', value)}
-          />
-        </div>
-        <div className="w-1/4">
-          <Slider
-            min={ranges.field.min}
-            max={ranges.field.max}
-            value={filters.field}
-            label="Max Field Area"
-            onChange={(value) => handleFilterChange('field', value)}
-          />
-        </div>
+      <main className="flex-grow container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">Find Your Perfect Apartment</h1>
+        
+        {/* Filter UI */}
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Filter Apartments</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Max Price</label>
+              <Slider
+                min={ranges.price.min}
+                max={ranges.price.max}
+                value={filters.price}
+                label="Max Price"
+                onChange={(value) => handleFilterChange('price', value)}
+              />
+            </div>
+            <div className="w-1/4">
+              <Slider
+                min={ranges.field.min}
+                max={ranges.field.max}
+                value={filters.field}
+                label="Max Field Area"
+                onChange={(value) => handleFilterChange('field', value)}
+              />
+            </div>
         <div className="w-1/4">
           <label className="block mb-2">Rooms Amount</label>
           <div className="flex space-x-2">
-            <input
-              type="number"
-              placeholder="Min"
-              value={filters.roomsMin || ''}
-              onChange={(e) => handleFilterChange('roomsMin', e.target.value ? Number(e.target.value) : null)}
-              className="w-1/2 px-2 py-1 border rounded"
-            />
-            <input
-              type="number"
-              placeholder="Max"
-              value={filters.roomsMax || ''}
-              onChange={(e) => handleFilterChange('roomsMax', e.target.value ? Number(e.target.value) : null)}
-              className="w-1/2 px-2 py-1 border rounded"
-            />
+          <input
+                  type="number"
+                  placeholder="Min"
+                  value={filters.roomsMin || ''}
+                  onChange={(e) => handleFilterChange('roomsMin', e.target.value ? Number(e.target.value) : null)}
+                  className="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+                <input
+                  type="number"
+                  placeholder="Max"
+                  value={filters.roomsMax || ''}
+                  onChange={(e) => handleFilterChange('roomsMax', e.target.value ? Number(e.target.value) : null)}
+                  className="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
           </div>
         </div>
         <div className="w-1/4">
           <label className="block mb-2">Floor</label>
           <div className="flex space-x-2">
-            <input
-              type="number"
-              placeholder="Min"
-              value={filters.floorMin || ''}
-              onChange={(e) => handleFilterChange('floorMin', e.target.value ? Number(e.target.value) : null)}
-              className="w-1/2 px-2 py-1 border rounded"
-            />
-            <input
-              type="number"
-              placeholder="Max"
-              value={filters.floorMax || ''}
-              onChange={(e) => handleFilterChange('floorMax', e.target.value ? Number(e.target.value) : null)}
-              className="w-1/2 px-2 py-1 border rounded"
-            />
+          <input
+                  type="number"
+                  placeholder="Min"
+                  value={filters.floorMin || ''}
+                  onChange={(e) => handleFilterChange('floorMin', e.target.value ? Number(e.target.value) : null)}
+                  className="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+                <input
+                  type="number"
+                  placeholder="Max"
+                  value={filters.floorMax || ''}
+                  onChange={(e) => handleFilterChange('floorMax', e.target.value ? Number(e.target.value) : null)}
+                  className="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
           </div>
         </div>
       </div>
 
       {/* Apartments Table */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full table-auto border-collapse border border-gray-300">
-          <thead>
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden text-black">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
             <tr className="bg-gray-100">
               <th className="px-4 py-2 border border-gray-300 text-left">Building</th>
               <th className="px-4 py-2 border border-gray-300 text-left">Floor</th>
@@ -169,7 +173,9 @@ const Apartments: React.FC = () => {
             ))}
           </tbody>
         </table>
-      </div>
+        </div>
+        </div>
+        </main>
     </div>
   );
 };

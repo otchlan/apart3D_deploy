@@ -7,8 +7,12 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
 
+
+
 const View3D: React.FC = () => {
     const mountRef = useRef<HTMLDivElement | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadingProgress, setLoadingProgress] = useState(0);
     const [popup, setPopup] = useState<{visible: boolean, content: string, position: {x: number, y: number}}>({
         visible: false,
         content: '',
@@ -25,6 +29,7 @@ const View3D: React.FC = () => {
             const controls = new OrbitControls(camera, renderer.domElement);
             controls.minPolarAngle = Math.PI / 4;
             controls.maxPolarAngle = Math.PI / 2.2;
+            controls.enableZoom = false;
 
             // Set the size of the renderer
             const width = 800;
@@ -77,9 +82,12 @@ const View3D: React.FC = () => {
                 objLoader.setPath('/3d-objects/');  // Ustaw ścieżkę do folderu z plikiem OBJ
                 objLoader.load('OBJMultiv2.obj', (object) => {
                     // Kiedy model zostanie załadowany, ustaw jego pozycję i skalę, a następnie dodaj do sceny
-                    object.position.set(-3.5, 0, 13);
+                    object.position.set(-4.5, 0, 13);
                     object.scale.set(1, 1, 1);
                     scene.add(object);
+                    setLoadingProgress(100);
+                    setIsLoading(false);
+                    
                     /*
                     const mesh = scene.getObjectByName('Building3MultiObject')
 
@@ -107,10 +115,12 @@ const View3D: React.FC = () => {
                         */
                 }, 
                 (xhr) => {
-                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');  // Procent ładowania
+                    const progress = (xhr.loaded / xhr.total) * 100;
+                    setLoadingProgress(Math.round(progress)); // Procent ładowania
                 }, 
                 (error) => {
                     console.error('An error happened while loading the OBJ', error);
+                    setIsLoading(false);
                 });
             });
 
@@ -181,7 +191,7 @@ const View3D: React.FC = () => {
                 groundTexture.wrapT = THREE.RepeatWrapping;
                 groundTexture.repeat.set(10, 10);
 
-                const planeGeometry = new THREE.PlaneGeometry(40, 20);
+                const planeGeometry = new THREE.PlaneGeometry(60, 30);
                 const planeMaterial = new THREE.MeshStandardMaterial({ 
                     map: groundTexture,
                     roughness: 0.8,
@@ -199,7 +209,7 @@ const View3D: React.FC = () => {
             scene.background = new THREE.Color(0x87CEEB); // Sky blue color
 
             // Set the camera position
-            camera.position.set(20, 3, 20);
+            camera.position.set(0, 0, 15);
             camera.lookAt(0, 0, 0);
             controls.update();
 
@@ -359,6 +369,43 @@ const View3D: React.FC = () => {
     return (
         <div style={{ position: 'relative', width: '800px', height: '600px' }}>
             <div ref={mountRef} style={{ width: '100%', height: '100%' }} />
+            {isLoading && (
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    background: 'rgba(0, 0, 0, 0.7)',
+                    color: 'white',
+                    fontSize: '24px',
+                    zIndex: 1000,
+                }}>
+                    <div>Loading 3D Model...</div>
+                    <div style={{ marginTop: '20px', fontSize: '18px' }}>
+                        {loadingProgress}%
+                    </div>
+                    <div style={{
+                        width: '200px',
+                        height: '20px',
+                        background: '#333',
+                        marginTop: '10px',
+                        borderRadius: '10px',
+                        overflow: 'hidden',
+                    }}>
+                        <div style={{
+                            width: `${loadingProgress}%`,
+                            height: '100%',
+                            background: '#4CAF50',
+                            transition: 'width 0.3s ease-in-out',
+                        }} />
+                    </div>
+                </div>
+            )}
             {popup.visible && (
                 <div style={{
                     position: 'absolute',
