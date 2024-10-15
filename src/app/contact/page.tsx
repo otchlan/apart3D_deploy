@@ -1,137 +1,87 @@
 "use client"
-import { useState } from 'react';
 
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
+import React from 'react';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import Button from '@/components/button';
 
-interface FormErrors {
-  name: string;
-  email: string;
-  message: string;
-}
-
-const Contact = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const [formErrors, setFormErrors] = useState<FormErrors>({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const validateForm = () => {
-    const errors: Partial<FormErrors> = {}; // Use Partial to allow incomplete objects
-    
-    if (!formData.name) errors.name = 'Name is required';
-    if (!formData.email) {
-      errors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = 'Email is invalid';
-    }
-    if (!formData.message) errors.message = 'Message is required';
-    
-    setFormErrors(errors as FormErrors); // Type assertion to ensure correct type
-    
-    return Object.keys(errors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      console.log('Form submitted', formData);
-      // Reset form or show success message here if needed
-    }
-  };
-
+const ContactPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <h2 className="text-center text-3xl font-extrabold text-gray-900">
-          Contact Us
-        </h2>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="name" className="sr-only">Name</label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className={`appearance-none rounded-none relative block w-full px-3 py-2 border ${
-                  formErrors.name ? 'border-red-500' : 'border-gray-300'
-                } placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                placeholder="Name"
-              />
-              {formErrors.name && (
-                <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>
-              )}
-            </div>
-            <div>
-              <label htmlFor="email" className="sr-only">Email address</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className={`appearance-none rounded-none relative block w-full px-3 py-2 border ${
-                  formErrors.email ? 'border-red-500' : 'border-gray-300'
-                } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                placeholder="Email address"
-              />
-              {formErrors.email && (
-                <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
-              )}
-            </div>
-            <div>
-              <label htmlFor="message" className="sr-only">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                required
-                value={formData.message}
-                onChange={handleChange}
-                className={`appearance-none rounded-none relative block w-full px-3 py-2 border ${
-                  formErrors.message ? 'border-red-500' : 'border-gray-300'
-                } placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                placeholder="Your message"
-              />
-              {formErrors.message && (
-                <p className="text-red-500 text-xs mt-1">{formErrors.message}</p>
-              )}
-            </div>
-          </div>
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-purple-50">
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <section className="container mx-auto px-4 py-20 text-center">
+          <h1 className="text-5xl font-bold text-gray-800 mb-6">Get in Touch</h1>
+          <p className="text-xl text-gray-600 mb-8">We're here to answer any questions you may have about our apartments.</p>
+        </section>
 
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Send Message
-            </button>
+        {/* Contact Form and Info Section */}
+        <section className="container mx-auto px-4 py-20">
+          <div className="flex flex-col md:flex-row gap-12">
+            {/* Contact Form */}
+            <div className="w-full md:w-2/3">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Send Us a Message</h2>
+              <form className="space-y-6 text-black" onSubmit={(e) => e.preventDefault()}>
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                  <input type="text" id="name" name="name" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500" />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                  <input type="email" id="email" name="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500" />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+                  <textarea id="message" name="message" rows={4} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"></textarea>
+                </div>
+                <div>
+                  <Button onClick={() => console.log('Form submitted')}>Send Message</Button>
+                </div>
+              </form>
+            </div>
+
+            {/* Contact Info */}
+            <div className="w-full md:w-1/3 bg-white p-8 rounded-lg shadow-lg">
+              <h2 className="text-3xl font-semibold text-gray-800 mb-6">Contact Information</h2>
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <Mail className="w-6 h-6 text-purple-600 mr-4" />
+                  <span className="text-gray-600">info@yourapartments.com</span>
+                </div>
+                <div className="flex items-center">
+                  <Phone className="w-6 h-6 text-purple-600 mr-4" />
+                  <span className="text-gray-600">+1 (555) 123-4567</span>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-6 h-6 text-purple-600 mr-4" />
+                  <span className="text-gray-600">123 Apartment St, Cityville, ST 12345</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </form>
-      </div>
+        </section>
+
+        {/* Map Section */}
+        <section className="container mx-auto px-4 py-20">
+          <h2 className="text-3xl font-semibold text-center text-gray-800 mb-12">Our Location</h2>
+          <div className="w-full h-96 bg-gray-300 rounded-lg shadow-lg">
+            {/* Replace this div with an actual map component */}
+            <div className="w-full h-full flex items-center justify-center text-gray-500">
+              Map placeholder - Replace with actual map component
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-20">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-semibold mb-6">Ready to Find Your Dream Home?</h2>
+            <p className="text-xl mb-8">Schedule a viewing of our apartments today.</p>
+            <Button variant="secondary" size="large">Book a Tour</Button>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Contact;
+export default ContactPage;

@@ -20,7 +20,7 @@ export default function Navbar() {
             <NavLink href="/">Home</NavLink>
             <NavLink href="/3d">3D</NavLink>
             <NavLink href="/apartments">Mieszkania</NavLink>
-            <NavLink href="/portfolio">O nas</NavLink>
+            <NavLink href="/about-us">O nas</NavLink>
             <NavLink href="/contact">Kontakt</NavLink>
             <NavLink href="/example">Example</NavLink>
             <NavLink href="/localisation">Lokalizacja</NavLink>
@@ -47,7 +47,7 @@ export default function Navbar() {
             <MobileNavLink href="/">Home</MobileNavLink>
             <MobileNavLink href="/3d">3D</MobileNavLink>
             <MobileNavLink href="/apartments">Mieszkania</MobileNavLink>
-            <MobileNavLink href="/portfolio">O nas</MobileNavLink>
+            <MobileNavLink href="/about-us">O nas</MobileNavLink>
             <MobileNavLink href="/contact">Kontakt</MobileNavLink>
             <MobileNavLink href="/example">Example</MobileNavLink>
             <MobileNavLink href="/localisation">Lokalizacja</MobileNavLink>
