@@ -6,4 +6,6 @@ export interface Apartment {
     RoomsAmount: string;
     Balcony: string;
     Price: string;
+    ID: string;
+    ApartmentState: string;
   }

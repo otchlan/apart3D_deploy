@@ -12,8 +12,12 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        'tillana': ['Tillana', 'system-ui', 'sans-serif'],
+      },
     },
   },
   plugins: [],
 };
+
 export default config;

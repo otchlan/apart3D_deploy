@@ -1,39 +1,63 @@
-"use client"
-
-import React, { useState } from 'react';
+// src/app/navbar.tsx
+"use client";
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import SocialLinks from '@/components/social-media';
 import { Menu } from 'lucide-react';
+import styles from './navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const updateTextStroke = () => {
+      if (navRef.current) {
+        const bgColor = window.getComputedStyle(navRef.current).backgroundColor;
+        const rgb = bgColor.match(/\d+/g);
+        if (rgb) {
+          const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+          const textStrokeColor = brightness > 128 ? 'black' : 'white';
+          const navLinks = navRef.current.querySelectorAll(`.${styles.navLink}`);
+          navLinks.forEach((link) => {
+            (link as HTMLElement).style.webkitTextStroke = `1px ${textStrokeColor}`;
+            (link as HTMLElement).style.textStroke = `1px ${textStrokeColor}`;
+          });
+        }
+      }
+    };
+
+    updateTextStroke();
+    window.addEventListener('scroll', updateTextStroke);
+    return () => window.removeEventListener('scroll', updateTextStroke);
+  }, []);
 
   return (
-    <nav className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
-          <div className="text-2xl font-bold tracking-tight">
-            <Link href="/" className="hover:text-pink-300 transition duration-300">LOGO</Link>
+    <nav className={styles.navbar} ref={navRef}>
+      <div className={styles.container}>
+        <div className={styles.navContent}>
+          <div className={styles.logo}>
+            <Link href="/" className={styles.navLink}>LOGO</Link>
           </div>
           
-          <div className="hidden md:flex space-x-8">
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/3d">3D</NavLink>
-            <NavLink href="/apartments">Mieszkania</NavLink>
-            <NavLink href="/about-us">O nas</NavLink>
-            <NavLink href="/contact">Kontakt</NavLink>
-            <NavLink href="/example">Example</NavLink>
-            <NavLink href="/localisation">Lokalizacja</NavLink>
+          <div className={styles.navLinks}>
+            <NavButton onClick={() => window.location.href = "/"}>Home</NavButton>
+            <NavButton onClick={() => window.location.href = "/3d"}>3D</NavButton>
+            <NavButton onClick={() => window.location.href = "/apartments"}>Mieszkania</NavButton>
+            <NavButton onClick={() => window.location.href = "/about-us"}>O nas</NavButton>
+            <NavButton onClick={() => window.location.href = "/contact"}>Kontakt</NavButton>
+            <NavButton onClick={() => window.location.href = "/example"}>Example</NavButton>
+            <NavButton onClick={() => window.location.href = "/localisation"}>Lokalizacja</NavButton>
           </div>
           
-          <div className="hidden md:block">
+          <div className={styles.socialLinks}>
             <SocialLinks />
           </div>
           
-          <div className="md:hidden">
+          <div>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-pink-300 transition duration-300"
+              className={styles.menuButton}
             >
               <Menu size={24} />
             </button>
@@ -42,17 +66,17 @@ export default function Navbar() {
       </div>
       
       {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <MobileNavLink href="/">Home</MobileNavLink>
-            <MobileNavLink href="/3d">3D</MobileNavLink>
-            <MobileNavLink href="/apartments">Mieszkania</MobileNavLink>
-            <MobileNavLink href="/about-us">O nas</MobileNavLink>
-            <MobileNavLink href="/contact">Kontakt</MobileNavLink>
-            <MobileNavLink href="/example">Example</MobileNavLink>
-            <MobileNavLink href="/localisation">Lokalizacja</MobileNavLink>
+        <div className={styles.mobileMenu}>
+          <div>
+            <MobileNavButton onClick={() => window.location.href = "/"}>Home</MobileNavButton>
+            <MobileNavButton onClick={() => window.location.href = "/3d"}>3D</MobileNavButton>
+            <MobileNavButton onClick={() => window.location.href = "/apartments"}>Mieszkania</MobileNavButton>
+            <MobileNavButton onClick={() => window.location.href = "/about-us"}>O nas</MobileNavButton>
+            <MobileNavButton onClick={() => window.location.href = "/contact"}>Kontakt</MobileNavButton>
+            <MobileNavButton onClick={() => window.location.href = "/example"}>Example</MobileNavButton>
+            <MobileNavButton onClick={() => window.location.href = "/localisation"}>Lokalizacja</MobileNavButton>
           </div>
-          <div className="px-4 py-3">
+          <div>
             <SocialLinks />
           </div>
         </div>
@@ -61,29 +85,29 @@ export default function Navbar() {
   );
 }
 
-interface NavLinkProps {
-  href: string;
+interface NavButtonProps {
+  onClick: () => void;
   children: React.ReactNode;
 }
 
-function NavLink({ href, children }: NavLinkProps) {
+function NavButton({ onClick, children }: NavButtonProps) {
   return (
-    <Link
-      href={href}
-      className="text-white hover:text-pink-300 px-3 py-2 rounded-md text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105"
+    <button
+      onClick={onClick}
+      className={styles.navLink}
     >
       {children}
-    </Link>
+    </button>
   );
 }
 
-function MobileNavLink({ href, children }: NavLinkProps) {
+function MobileNavButton({ onClick, children }: NavButtonProps) {
   return (
-    <Link
-      href={href}
-      className="text-white hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-300"
+    <button
+      onClick={onClick}
+      className={styles.mobileNavLink}
     >
       {children}
-    </Link>
+    </button>
   );
 }

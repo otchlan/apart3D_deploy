@@ -17,8 +17,9 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Tillana, system-ui, sans-serif;
 }
+
 
 @layer utilities {
   .text-balance {

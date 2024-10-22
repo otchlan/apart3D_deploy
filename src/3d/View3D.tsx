@@ -5,6 +5,29 @@ import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRe
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
+import useApartments from '@/hooks/useApartments';
+
+interface StateColors {
+    FREE: number;
+    RESERVED: number;
+    SOLD: number;
+    [key: string]: number;
+}
+
+const stateColors: StateColors = {
+    FREE: 0x00ff00,     // Green
+    RESERVED: 0xffa500, // Orange
+    SOLD: 0xff0000      // Red
+};
+
+
+const buildingIdMap: { [key: string]: string } = {
+    'Building1MultiObject': '1',
+    'Building2MultiObject': '2',
+    'Building3MultiObject': '3',
+    'Building4MultiObject': '4',
+    'Building5MultiObject': '5'
+};
 
 
 
@@ -19,8 +42,62 @@ const View3D: React.FC = () => {
         position: {x: 0, y: 0}
     });
 
+    const { apartments, loading: apartmentsLoading, error } = useApartments();
+
     useEffect(() => {
-        if (mountRef.current) {
+        console.log(apartments);
+    }, [apartmentsLoading])
+
+    useEffect(() => {
+        if (!apartmentsLoading && apartments) {
+            console.log('Apartments data loaded:', apartments);
+            console.log('Apartment states:', apartments.map(apt => ({
+                id: apt.ID,
+                state: apt.ApartmentState
+            })));
+        }
+    }, [apartments, apartmentsLoading]);
+
+    const logApartmentData = (buildingName: string) => {
+        const buildingId = buildingIdMap[buildingName];
+        console.log('Building Name:', buildingName);
+        console.log('Building ID:', buildingId);
+        console.log('All Apartments:', apartments);
+        const apartment = apartments?.find(apt => apt.ID === buildingId);
+        console.log('Found Apartment:', apartment);
+    };
+
+    const getApartmentState = (buildingName: string): string => {
+        if (!apartments || apartmentsLoading || error) {
+            console.log('Apartments not loaded or error:', { apartmentsLoading, error });
+            return 'free';
+        }
+        
+        const buildingId = buildingIdMap[buildingName];
+        const apartment = apartments.find(apt => apt.ID === buildingId);
+        
+        // Log for debugging
+        logApartmentData(buildingName);
+        
+        if (!apartment) {
+            console.log('No apartment found for building:', buildingName);
+            return 'free';
+        }
+
+        // Make sure we're using uppercase state values
+        const state = apartment.ApartmentState?.toUpperCase() || 'free';
+        console.log('Apartment State:', state);
+        return state;
+    };
+
+    const getHoverColor = (buildingName: string): number => {
+        const state = getApartmentState(buildingName);
+        console.log('Getting hover color for state:', state);
+        return stateColors[state as keyof typeof stateColors] || stateColors.free;
+    };
+
+    useEffect(() => {
+        if (mountRef.current && !apartmentsLoading && apartments) {
             // Set up the scene
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
@@ -30,6 +107,55 @@ const View3D: React.FC = () => {
             controls.minPolarAngle = Math.PI / 4;
             controls.maxPolarAngle = Math.PI / 2.2;
             controls.enableZoom = false;
+            controls.enablePan = false;
+
+            const groundGeometry = new THREE.CircleGeometry(100, 32);
+            const groundMaterial = new THREE.MeshStandardMaterial({
+                color: 0x808080,
+                roughness: 0.8,
+                metalness: 0.2,
+            });
+            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.rotation.x = -Math.PI / 2;
+            ground.position.y = -2;
+            scene.add(ground);
+            
+            const textureLoader360 = new THREE.TextureLoader();
+            textureLoader360.load(
+                '/360-view-ground.jpg', // Replace with your 360° photo path
+                (texture) => {
+                    texture.mapping = THREE.EquirectangularReflectionMapping;
+                    scene.background = texture;
+                    scene.environment = texture; // This will also affect reflective materials
+                },
+                (xhr) => {
+                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                },
+                (error) => {
+                    console.error('Error loading 360° texture:', error);
+                    // Fallback to solid color if loading fails
+                    scene.background = new THREE.Color(0x87CEEB);
+                }
+            );
+
+            const sphereGeometry = new THREE.SphereGeometry(500, 60, 40, 0, Math.PI * 2, 0, Math.PI / 2);
+            // Invert the geometry so that the texture is rendered on the inside
+            sphereGeometry.scale(-1, 1, 1);
+            
+            const sphereMaterial = new THREE.MeshBasicMaterial({
+                side: THREE.BackSide,
+                transparent: true,
+                opacity: 1
+            });
+            
+            const skybox = new THREE.Mesh(sphereGeometry, sphereMaterial);
+            scene.add(skybox);
+
+            
+
+            // Update the camera's far plane to see the entire skybox
+            camera.far = 1000;
+            camera.updateProjectionMatrix();
 
             // Set the size of the renderer
             const width = 800;
@@ -49,6 +175,16 @@ const View3D: React.FC = () => {
             const cubeParts: THREE.Mesh[] = [];
 
             const group1 = new THREE.Group();
+
+            const positionObjectsInCircle = (objects: THREE.Object3D[], radius: number) => {
+                const numberOfObjects = objects.length;
+                objects.forEach((obj, index) => {
+                    const angle = (index / numberOfObjects) * Math.PI * 2;
+                    const x = Math.cos(angle) * radius;
+                    const z = Math.sin(angle) * radius;
+                    obj.position.set(x, ground.position.y, z);
+                });
+            };
 
             /*
 
@@ -202,7 +338,7 @@ const View3D: React.FC = () => {
                 plane.position.y = -0.5;
                 plane.position.x = 2;
                 plane.receiveShadow = true;
-                scene.add(plane);
+                //scene.add(plane);
             });           
 
             // Create a simple colored background instead of skybox
@@ -210,7 +346,9 @@ const View3D: React.FC = () => {
 
             // Set the camera position
             camera.position.set(0, 0, 15);
-            camera.lookAt(0, 0, 0);
+            camera.lookAt(0, ground.position.y, 0);
+            //camera.lookAt(0, ground.position.y, 0);
+            //camera.fov = 90; 
             controls.update();
 
             // Update camera aspect ratio
@@ -273,8 +411,8 @@ const View3D: React.FC = () => {
             };
 
             const setHoveredPart = (part: THREE.Mesh) => {
-
                 const materials = Array.isArray(part.material) ? part.material : [part.material];
+                const hoverColor = getHoverColor(part.name);
 
                 materials.forEach((material, index) => {
                     const clonedMaterial = material.clone();
@@ -287,7 +425,7 @@ const View3D: React.FC = () => {
                         if (part.userData.originalColor === undefined) {
                             part.userData.originalColor = clonedMaterial.color.getHex();
                         }
-                        clonedMaterial.color.set(0xff0000);
+                        clonedMaterial.color.setHex(hoverColor);
                     }
 
                     if (part.userData.originalOpacity === undefined) {
@@ -306,7 +444,7 @@ const View3D: React.FC = () => {
             
             // Function to show popup
             const showPopup = (event: MouseEvent, rect: DOMRect, buildingName: string) => {
-                const popupWidth = 100;
+                const popupWidth = 150;
                 const popupHeight = 30;
                 const margin = 10;
             
@@ -317,9 +455,10 @@ const View3D: React.FC = () => {
                 if (popupX + popupWidth > width) popupX = width - popupWidth - margin;
                 if (popupY + popupHeight > height) popupY = height - popupHeight - margin;
             
+                const state = getApartmentState(buildingName);
                 setPopup({
                     visible: true,
-                    content: `Object: ${buildingName}`,
+                    content: `${buildingName} - Status: ${state.toUpperCase()}`,
                     position: {
                         x: popupX,
                         y: popupY
@@ -364,7 +503,7 @@ const View3D: React.FC = () => {
                 }
             };
         }
-    }, []);
+    }, [mountRef, apartments, apartmentsLoading]);
 
     return (
         <div style={{ position: 'relative', width: '800px', height: '600px' }}>
@@ -408,6 +547,7 @@ const View3D: React.FC = () => {
             )}
             {popup.visible && (
                 <div style={{
+                    color: 'black',
                     position: 'absolute',
                     left: popup.position.x,
                     top: popup.position.y,

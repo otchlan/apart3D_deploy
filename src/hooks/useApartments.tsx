@@ -33,6 +33,8 @@ const useApartments = () => {
                 RoomsAmount: record.fields['RoomsAmount'] as string,
                 Balcony: record.fields['Balcony'] as string,
                 Price: record.fields['Price'] as string,
+                ID: record.fields['ID'] as string,
+                ApartmentState: record.fields['ApartmentState'] as string,
               });
             });
             fetchNextPage();
