@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: transparent; /* Change background to transparent */
+  --foreground: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: transparent; /* Ensure transparency in dark mode as well */
+    --foreground: transparent;
   }
 }
 
@@ -20,9 +20,13 @@ body {
   font-family: Tillana, system-ui, sans-serif;
 }
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.bg-white {
+  --tw-bg-opacity: 0; /* Set opacity to 0 for transparency */
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }

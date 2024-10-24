@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
-
-
-
 
 const View3DSmall: React.FC = () => {
     const mountRef = useRef<HTMLDivElement | null>(null);
     const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
     const labelRendererRef = useRef<CSS2DRenderer | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [showMotionIcon, setShowMotionIcon] = useState(true);
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [popup, setPopup] = useState<{visible: boolean, content: string, position: {x: number, y: number}}>({
         visible: false,
@@ -21,28 +18,42 @@ const View3DSmall: React.FC = () => {
         position: {x: 0, y: 0}
     });
 
+    // Define the cleanupCanvas function
+    const cleanupCanvas = () => {
+        if (mountRef.current) {
+            if (rendererRef.current) {
+                mountRef.current.removeChild(rendererRef.current.domElement);
+            }
+            if (labelRendererRef.current) {
+                mountRef.current.removeChild(labelRendererRef.current.domElement);
+            }
+        }
+    };
+
     useEffect(() => {
         if (mountRef.current) {
             // Set up the scene
             const scene = new THREE.Scene();
+            scene.background = null;
             const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            const renderer = new THREE.WebGLRenderer({ 
+                antialias: true,
+                alpha: true,
+                premultipliedAlpha: false
+            });
             const labelRenderer = new CSS2DRenderer();
             const controls = new OrbitControls(camera, renderer.domElement);
             controls.minPolarAngle = Math.PI / 4;
             controls.maxPolarAngle = Math.PI / 2.2;
             controls.enableZoom = false;
 
-            // Set the size of the renderer
             rendererRef.current = renderer;
             labelRendererRef.current = labelRenderer;
 
-            // Get initial container dimensions
             const container = mountRef.current;
             const width = container.clientWidth;
             const height = container.clientHeight;
 
-            // Set initial size
             renderer.setSize(width, height);
             labelRenderer.setSize(width, height);
 
@@ -51,137 +62,86 @@ const View3DSmall: React.FC = () => {
                 mountRef.current.appendChild(labelRenderer.domElement);
             }
 
-            // Create cube parts
-            const cubeGroup = new THREE.Group();
-            const size = 0.5;
-            const gap = 0.05;
-            const cubeParts: THREE.Mesh[] = [];
-
-            const group1 = new THREE.Group();
-
-            /*
-
-            const loader = new FBXLoader();
-            loader.setPath('/3d-objects/');
-            loader.load('FBX.fbx', (fbx) => {
-                fbx.position.set(1, 0, 20);
-                fbx.scale.set(0.005, 0.005, 0.005);
-            // Add the loaded FBX model to the scene
-            scene.add(fbx);
-            console.log('FBX Model Loaded:', fbx);
-
-            // Optionally animate the model (FBX models often come with animations)
-            fbx.traverse((child) => {
-                if (child instanceof THREE.Mesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                }
-            });
-            });
-            */
-
-            const mtlLoader = new MTLLoader();
-            mtlLoader.setPath('/3d-objects/');  // Ustawienie ścieżki do folderu z plikami OBJ i MTL
-            mtlLoader.load('OBJMultiv2.mtl', (materials) => {
-                materials.preload();  // Preload materiałów
             
-                // Następnie załaduj plik OBJ z wczytanymi materiałami
-                const objLoader = new OBJLoader();
-                objLoader.setMaterials(materials);  // Przypisz materiały z MTL
-                objLoader.setPath('/3d-objects/');  // Ustaw ścieżkę do folderu z plikiem OBJ
-                objLoader.load('OBJMultiv2.obj', (object) => {
-                    // Kiedy model zostanie załadowany, ustaw jego pozycję i skalę, a następnie dodaj do sceny
-                    object.position.set(-4.5, 0, 13);
-                    object.scale.set(1, 1, 1);
-                    scene.add(object);
-                    setLoadingProgress(100);
-                    setIsLoading(false);
-                    
-                    /*
-                    const mesh = scene.getObjectByName('Building3MultiObject')
 
-                    console.log(mesh)
-                    console.log(mesh instanceof THREE.Mesh)
-                    if (mesh instanceof THREE.Mesh) {
-                        // Clone the material to avoid affecting other objects using the same material
-                        mesh.material = Array.isArray(mesh.material)
-                            ? mesh.material.map((mat) => mat.clone())  // Clone each material if it's an array
-                            : mesh.material.clone();                   // Clone the single material
-                    
-                        const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-                    
-                        materials.forEach((material, index) => {
-                            // Check if the material has a color property
-                            if ((material as THREE.MeshBasicMaterial).color) {
-                                (material as THREE.MeshBasicMaterial).color.set(0xff0000);  // Set color to red
-                            } else {
-                                console.error(`Material ${index} does not have a color property.`);
-                            }
-                        });
-                    } else {
-                        console.error('The object is not a mesh or was not found.');
-                    }
-                        */
-                }, 
-                (xhr) => {
-                    const progress = (xhr.loaded / xhr.total) * 100;
-                    setLoadingProgress(Math.round(progress)); // Procent ładowania
-                }, 
-                (error) => {
-                    console.error('An error happened while loading the OBJ', error);
-                    setIsLoading(false);
-                });
-            });
+            // Track loading progress for both objects
+            let objectsLoaded = 0;
+            const totalObjects = 2;
+            const updateProgress = (individualProgress: number) => {
+                const baseProgress = (objectsLoaded * 100) / totalObjects;
+                const currentProgress = individualProgress / totalObjects;
+                setLoadingProgress(Math.round(baseProgress + currentProgress));
+            };
 
-            // Load textures with error handling
-            const textureLoader = new THREE.TextureLoader();
-            const loadTexture = (url: string) => {
-                return new Promise<THREE.Texture>((resolve) => {
-                    textureLoader.load(
-                        url,
-                        (texture) => resolve(texture),
-                        undefined,
-                        () => {
-                            console.error(`Failed to load texture: ${url}`);
-                            resolve(new THREE.Texture()); // Return a default texture
-                        }
-                    );
+            // Load first object (background)
+            const loadFirstObject = () => {
+                const mtlLoader = new MTLLoader();
+                mtlLoader.setPath('/3d-objects/Building/');
+                mtlLoader.load('OBJMultiv2.mtl', (materials) => {
+                    materials.preload();
+                
+                    const objLoader = new OBJLoader();
+                    objLoader.setMaterials(materials);
+                    objLoader.setPath('/3d-objects/Building/');
+                    objLoader.load('OBJMultiv2.obj', (object) => {
+                        object.position.set(-4.5, 0, 13);
+                        object.scale.set(1.5, 1.5, 1.5);
+                        scene.add(object);
+                        objectsLoaded++;
+                        updateProgress(100);
+                        loadSecondObject(); // Load second object after first is complete
+                    }, 
+                    (xhr) => {
+                        const progress = (xhr.loaded / xhr.total) * 100;
+                        updateProgress(progress);
+                    }, 
+                    (error) => {
+                        console.error('Error loading first object:', error);
+                        objectsLoaded++;
+                        loadSecondObject(); // Try loading second object even if first fails
+                    });
                 });
             };
 
-            Promise.all([
-                loadTexture('/wood-texture.jpg'),
-                loadTexture('/metal-texture.jpg')
-            ]).then(([woodTexture, metalTexture]) => {
-                for (let x = 0; x < 2; x++) {
-                    for (let y = 0; y < 2; y++) {
-                        for (let z = 0; z < 2; z++) {
-                            const geometry = new THREE.BoxGeometry(size, size, size);
-                            const material = new THREE.MeshStandardMaterial({ 
-                                map: x % 2 === 0 ? woodTexture : metalTexture,
-                                metalness: x % 2 === 0 ? 0.2 : 0.8,
-                                roughness: x % 2 === 0 ? 0.8 : 0.2,
-                            });
-                            const cubePart = new THREE.Mesh(geometry, material);
-                            cubePart.position.set(
-                                x * (size + gap) - (size + gap) / 2,
-                                y * (size + gap) - (size + gap) / 2,
-                                z * (size + gap) - (size + gap) / 2
-                            );
-                            cubePart.userData = { 
-                                partId: `${x}-${y}-${z}`,
-                                originalMetalness: material.metalness,
-                                originalRoughness: material.roughness
-                            };
-                            cubeGroup.add(cubePart);
-                            cubeParts.push(cubePart);
+            // Load second object (foreground)
+            const loadSecondObject = () => {
+                const mtlLoader = new MTLLoader();
+                mtlLoader.setPath('/3d-objects/LuminarySentinel/');
+                mtlLoader.load('model.mtl', (materials) => {
+                    materials.preload();
+                
+                    const objLoader = new OBJLoader();
+                    objLoader.setMaterials(materials);
+                    objLoader.setPath('/3d-objects/LuminarySentinel/');
+                    objLoader.load('Luminary_Sentinel.obj', (object) => {
+                        // Position the second object in front of the first one
+                        object.position.set(-4.5, 0, 8); // Reduced Z position to move it forward
+                        object.scale.set(1.5, 1.5, 1.5);
+                        scene.add(object);
+                        objectsLoaded++;
+                        updateProgress(100);
+                        if (objectsLoaded === totalObjects) {
+                            setIsLoading(false);
                         }
-                    }
-                }
-                //scene.add(cubeGroup);
-            });
+                    }, 
+                    (xhr) => {
+                        const progress = (xhr.loaded / xhr.total) * 100;
+                        updateProgress(progress);
+                    }, 
+                    (error) => {
+                        console.error('Error loading second object:', error);
+                        objectsLoaded++;
+                        if (objectsLoaded === totalObjects) {
+                            setIsLoading(false);
+                        }
+                    });
+                });
+            };
 
-            // Improved lighting
+            // Start loading objects
+            loadFirstObject();
+
+            // Lighting setup
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
             scene.add(ambientLight);
 
@@ -194,48 +154,94 @@ const View3DSmall: React.FC = () => {
             pointLight.position.set(-2, 1, 2);
             scene.add(pointLight);
 
-            /*
-            loadTexture('/grass-texture.jpg').then((groundTexture) => {
-                groundTexture.wrapS = THREE.RepeatWrapping;
-                groundTexture.wrapT = THREE.RepeatWrapping;
-                groundTexture.repeat.set(10, 10);
+            // Scene settings
+            renderer.setClearColor(0x000000, 0);
+            scene.background = null;
 
-                const planeGeometry = new THREE.PlaneGeometry(60, 30);
-                const planeMaterial = new THREE.MeshStandardMaterial({ 
-                    map: groundTexture,
-                    roughness: 0.8,
-                    metalness: 0.2
-                });
-                const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-                plane.rotation.x = - Math.PI / 2;
-                plane.position.y = -0.5;
-                plane.position.x = 2;
-                plane.receiveShadow = true;
-                scene.add(plane);
-            });*/
-
-            // Create a simple colored background instead of skybox
-            scene.background = new THREE.Color(0xffffff); // Sky blue color
-
-            // Set the camera position
+            // Camera setup
             camera.position.set(0, 0, 15);
             camera.lookAt(0, 0, 0);
             controls.update();
 
-            // Update camera aspect ratio
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
 
-            // Raycaster for hover detection
+            // Raycaster setup
             const raycaster = new THREE.Raycaster();
             const mouse = new THREE.Vector2();
 
             const isMaterialWithColor = (material: THREE.Material): material is THREE.Material & { color: THREE.Color } => {
                 return 'color' in material && material.color instanceof THREE.Color;
             };
-            
 
             let hoveredPart: THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap> | null = null;
+
+            const resetHoveredPart = (part: THREE.Mesh) => {
+                const materials = Array.isArray(part.material) ? part.material : [part.material];
+
+                materials.forEach((material) => {
+                    if (isMaterialWithColor(material) && part.userData.originalColor !== undefined) {
+                        material.color.set(part.userData.originalColor);
+                    }
+                    if (part.userData.originalOpacity !== undefined) {
+                        material.opacity = part.userData.originalOpacity;
+                        material.transparent = part.userData.originalOpacity < 1;
+                    }
+                });
+            };
+
+            const setHoveredPart = (part: THREE.Mesh) => {
+                const materials = Array.isArray(part.material) ? part.material : [part.material];
+
+                materials.forEach((material, index) => {
+                    const clonedMaterial = material.clone();
+                    
+                    if (part.userData.originalMaterials === undefined) {
+                        part.userData.originalMaterials = materials;
+                    }
+
+                    if (isMaterialWithColor(clonedMaterial)) {
+                        if (part.userData.originalColor === undefined) {
+                            part.userData.originalColor = clonedMaterial.color.getHex();
+                        }
+                        clonedMaterial.color.set(0xff0000);
+                    }
+
+                    if (part.userData.originalOpacity === undefined) {
+                        part.userData.originalOpacity = clonedMaterial.opacity;
+                    }
+
+                    if (Array.isArray(part.material)) {
+                        part.material[index] = clonedMaterial;
+                    } else {
+                        part.material = clonedMaterial;
+                    }
+                });
+
+                hoveredPart = part;
+            };
+
+            const showPopup = (event: MouseEvent, rect: DOMRect, buildingName: string) => {
+                const popupWidth = 100;
+                const popupHeight = 30;
+                const margin = 10;
+            
+                let popupX = event.clientX - rect.left - popupWidth - margin;
+                let popupY = event.clientY - rect.top;
+            
+                if (popupX < 0) popupX = margin;
+                if (popupX + popupWidth > width) popupX = width - popupWidth - margin;
+                if (popupY + popupHeight > height) popupY = height - popupHeight - margin;
+            
+                setPopup({
+                    visible: true,
+                    content: `Object: ${buildingName}`,
+                    position: {
+                        x: popupX,
+                        y: popupY
+                    }
+                });
+            };
 
             const onMouseMove = (event: MouseEvent) => {
                 const rect = mountRef.current!.getBoundingClientRect();
@@ -266,83 +272,7 @@ const View3DSmall: React.FC = () => {
                 }
             };
 
-            const resetHoveredPart = (part: THREE.Mesh) => {
-                const materials = Array.isArray(part.material) ? part.material : [part.material];
-
-                materials.forEach((material) => {
-                    if (isMaterialWithColor(material) && part.userData.originalColor !== undefined) {
-                        material.color.set(part.userData.originalColor);
-                    }
-                    if (part.userData.originalOpacity !== undefined) {
-                        material.opacity = part.userData.originalOpacity;
-                        material.transparent = part.userData.originalOpacity < 1;
-                    }
-                });
-
-            };
-
-            const setHoveredPart = (part: THREE.Mesh) => {
-
-                const materials = Array.isArray(part.material) ? part.material : [part.material];
-
-                materials.forEach((material, index) => {
-                    const clonedMaterial = material.clone();
-                    
-                    if (part.userData.originalMaterials === undefined) {
-                        part.userData.originalMaterials = materials;
-                    }
-
-                    if (isMaterialWithColor(clonedMaterial)) {
-                        if (part.userData.originalColor === undefined) {
-                            part.userData.originalColor = clonedMaterial.color.getHex();
-                        }
-                        clonedMaterial.color.set(0xff0000);
-                    }
-
-                    if (part.userData.originalOpacity === undefined) {
-                        part.userData.originalOpacity = clonedMaterial.opacity;
-                    }
-
-                    if (Array.isArray(part.material)) {
-                        part.material[index] = clonedMaterial;
-                    } else {
-                        part.material = clonedMaterial;
-                    }
-                });
-
-                hoveredPart = part;
-            };
-            
-            // Function to show popup
-            const showPopup = (event: MouseEvent, rect: DOMRect, buildingName: string) => {
-                const popupWidth = 100;
-                const popupHeight = 30;
-                const margin = 10;
-            
-                let popupX = event.clientX - rect.left - popupWidth - margin;
-                let popupY = event.clientY - rect.top;
-            
-                if (popupX < 0) popupX = margin;
-                if (popupX + popupWidth > width) popupX = width - popupWidth - margin;
-                if (popupY + popupHeight > height) popupY = height - popupHeight - margin;
-            
-                setPopup({
-                    visible: true,
-                    content: `Object: ${buildingName}`,
-                    position: {
-                        x: popupX,
-                        y: popupY
-                    }
-                });
-            };
-            
-            // Add event listener for mouse movement
             window.addEventListener('mousemove', onMouseMove);
-
-            
-
-            
-            
 
             // Handle window resize
             const handleResize = () => {
@@ -358,7 +288,6 @@ const View3DSmall: React.FC = () => {
                 }
             };
 
-            // Create ResizeObserver to handle container size changes
             const resizeObserver = new ResizeObserver(() => {
                 handleResize();
             });
@@ -367,7 +296,6 @@ const View3DSmall: React.FC = () => {
                 resizeObserver.observe(container);
             }
 
-            // Animation loop
             const animate = () => {
                 requestAnimationFrame(animate);
                 controls.update();
@@ -376,14 +304,11 @@ const View3DSmall: React.FC = () => {
             };
             animate();
 
-            // Cleanup
+            // Cleanup function
             return () => {
                 resizeObserver.disconnect();
                 window.removeEventListener('mousemove', onMouseMove);
-                if (mountRef.current) {
-                    mountRef.current.removeChild(renderer.domElement);
-                    mountRef.current.removeChild(labelRenderer.domElement);
-                }
+                cleanupCanvas();
             };
         }
     }, []);
@@ -391,18 +316,44 @@ const View3DSmall: React.FC = () => {
     return (
         <div style={{ 
             position: 'relative',
-            width: '100%',    // Takes full width of parent
-            height: '100%',   // Takes full height of parent
-            minHeight: '300px' // Ensures a minimum height
+            width: '100%',
+            height: '100%',
+            minHeight: '400px',
+            background: 'transparent',
         }}>
             <div ref={mountRef} style={{ 
                 width: '100%',
                 height: '100%',
                 position: 'absolute',
                 top: 0,
-                left: 0
+                left: 0,
+                background: 'transparent',
             }} />
-            {/* Loading and popup overlays remain the same */}
+            {showMotionIcon && (
+                <div 
+                    onClick={() => setShowMotionIcon(false)}
+                    style={{
+                        position: 'absolute',
+                        bottom: '20px',
+                        right: '20px',
+                        width: '40px',
+                        height: '40px',
+                        cursor: 'pointer',
+                        animation: 'blink 1s infinite',
+                        zIndex: 1000,
+                    }}
+                >
+                    <img 
+                        src="/3d-motion-w.png" 
+                        alt="3D Motion" 
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain',
+                        }}
+                    />
+                </div>
+            )}
             {isLoading && (
                 <div style={{
                     position: 'absolute',
@@ -419,7 +370,7 @@ const View3DSmall: React.FC = () => {
                     fontSize: '24px',
                     zIndex: 1000,
                 }}>
-                    <div>Loading 3D Model...</div>
+                    <div>Loading 3D Models...</div>
                     <div style={{ marginTop: '20px', fontSize: '18px' }}>
                         {loadingProgress}%
                     </div>
@@ -454,6 +405,13 @@ const View3DSmall: React.FC = () => {
                     {popup.content}
                 </div>
             )}
+            <style jsx>{`
+                @keyframes blink {
+                    0% { opacity: 1; }
+                    50% { opacity: 0.3; }
+                    100% { opacity: 1; }
+                }
+            `}</style>
         </div>
     );
 };
