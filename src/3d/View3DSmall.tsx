@@ -116,7 +116,7 @@ const View3DSmall: React.FC = () => {
                     objLoader.load('Luminary_Sentinel.obj', (object) => {
                         // Position the second object in front of the first one
                         object.position.set(-4.5, 0, 8); // Reduced Z position to move it forward
-                        object.scale.set(1.5, 1.5, 1.5);
+                        object.scale.set(1, 1, 1);
                         scene.add(object);
                         objectsLoaded++;
                         updateProgress(100);
@@ -339,7 +339,7 @@ const View3DSmall: React.FC = () => {
                         width: '40px',
                         height: '40px',
                         cursor: 'pointer',
-                        animation: 'blink 1s infinite',
+                        animation: 'blink 5s infinite',
                         zIndex: 1000,
                     }}
                 >

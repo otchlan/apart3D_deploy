@@ -41,13 +41,10 @@ export default function Navbar() {
           </div>
           
           <div className={styles.navLinks}>
-            <NavButton onClick={() => window.location.href = "/"}>Home</NavButton>
             <NavButton onClick={() => window.location.href = "/3d"}>3D</NavButton>
             <NavButton onClick={() => window.location.href = "/apartments"}>Mieszkania</NavButton>
             <NavButton onClick={() => window.location.href = "/about-us"}>O nas</NavButton>
             <NavButton onClick={() => window.location.href = "/contact"}>Kontakt</NavButton>
-            <NavButton onClick={() => window.location.href = "/example"}>Example</NavButton>
-            <NavButton onClick={() => window.location.href = "/localisation"}>Lokalizacja</NavButton>
           </div>
           
           <div className={styles.socialLinks}>

@@ -49,7 +49,7 @@ export default function HomePage() {
                   Interactive 3D Experience
                 </h2>
                 <p className="text-xl text-white">
-                  Take a virtual tour of our building and explore every detail before your visit. Our interactive 3D model lets you visualize your future home from any angle.
+                  Take a virtual tour of your building, explore every detail before your buy. Our interactive 3D solution lets you see your future home from any angle.
                 </p>
                 <div className="space-y-4">
                   <ul className="space-y-3">
@@ -72,7 +72,7 @@ export default function HomePage() {
                     className="mt-8"
                     onClick={() => window.location.href = '/3d-tour'}
                   >
-                    View Full 3D Tour
+                    View full 3D tour 
                   </Button>
                 </div>
               </div>
@@ -86,6 +86,7 @@ export default function HomePage() {
             </div>
 
             {/* Bottom text */}
+            {/*
             <div className="text-center mt-16">
               <h1 className="text-5xl font-bold text-white mb-6">
                 Welcome to Our Modern Living Spaces
@@ -95,6 +96,8 @@ export default function HomePage() {
               </p>
               <Button size="large">Explore Apartments</Button>
             </div>
+            */}
+
           </div>
         </section>
 
@@ -103,12 +106,18 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-semibold text-center text-gray-800 mb-12">Why Choose Us</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {['Innovative Designs', 'Prime Locations', 'Smart Home Tech'].map((feature, index) => (
-                <div key={index} className="text-center p-6 rounded-lg shadow-lg bg-gradient-to-br from-purple-100 to-indigo-100">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">{feature}</h3>
-                  <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div className="text-center p-6 rounded-lg shadow-lg bg-gradient-to-br from-purple-100 to-indigo-100">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Innovative Designs</h3>
+                  <p className="text-gray-600">---Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
-              ))}
+                <div className="text-center p-6 rounded-lg shadow-lg bg-gradient-to-br from-purple-100 to-indigo-100">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Prime Locations</h3>
+                  <p className="text-gray-600">---Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+                <div className="text-center p-6 rounded-lg shadow-lg bg-gradient-to-br from-purple-100 to-indigo-100">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Smart Home Tech</h3>
+                  <p className="text-gray-600">---Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
             </div>
           </div>
         </section>
