@@ -19,19 +19,25 @@ export default function Footer() {
             <ul className="space-y-2">
               <FooterLink href="/">Home</FooterLink>
               <FooterLink href="/3d">3D</FooterLink>
-              <FooterLink href="/apartments">Mieszkania</FooterLink>
-              <FooterLink href="/portfolio">O nas</FooterLink>
-              <FooterLink href="/contact">Kontakt</FooterLink>
+              <FooterLink href="/portfolio">About us</FooterLink>
             </ul>
           </div>
           
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
             <address className="not-italic text-sm space-y-2">
-              <p>123 Main Street</p>
-              <p>Anytown, AT 12345</p>
-              <p>Email: info@example.com</p>
-              <p>Phone: (555) 123-4567</p>
+              <p>mstachura@deeptechlabs.pl</p>
+              <p>+48 791 358 08(6+3)</p>
+              <p>
+                <a
+                  href="https://calendly.com/mstachura-deeptechlabs/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white font-bold hover:text-pink-300 transition duration-300 ease-in-out shadow-animation"
+                >
+                  Schedule a call
+                </a>
+              </p>
             </address>
           </div>
           
@@ -43,7 +49,7 @@ export default function Footer() {
         
         <div className="mt-8 pt-8 border-t border-purple-500 text-center">
           <p className="text-sm">
-            © {new Date().getFullYear()} Your Company Name. All rights reserved.
+            © {new Date().getFullYear()} APART 3D. All rights reserved.
           </p>
         </div>
       </div>

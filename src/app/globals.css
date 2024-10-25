@@ -30,3 +30,21 @@ body {
   --tw-bg-opacity: 0; /* Set opacity to 0 for transparency */
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
+
+/* Add this to your global CSS file, e.g., styles/globals.css */
+@keyframes shadowMove {
+  0% {
+    text-shadow: -20px 0 20px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    text-shadow: 20px 0 20px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.shadow-animation {
+  display: inline-block;
+  animation: shadowMove 3s infinite;
+}
