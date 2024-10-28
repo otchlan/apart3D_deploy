@@ -34,6 +34,8 @@ const buildingIdMap: { [key: string]: string } = {
 
 const View3D: React.FC = () => {
     const mountRef = useRef<HTMLDivElement | null>(null);
+    const [isImageModalVisible, setIsImageModalVisible] = useState(false);
+    const [clickedApartmentImage, setClickedApartmentImage] = useState<string | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(true);
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [popup, setPopup] = useState<{visible: boolean, content: string, position: {x: number, y: number}}>({
@@ -41,6 +43,7 @@ const View3D: React.FC = () => {
         content: '',
         position: {x: 0, y: 0}
     });
+    
 
     const { apartments, loading: apartmentsLoading, error } = useApartments();
 
@@ -96,6 +99,18 @@ const View3D: React.FC = () => {
         return stateColors[state as keyof typeof stateColors] || stateColors.free;
     };
 
+    const openImageModal = (apartmentData: any) => {
+        if (apartmentData && apartmentData.ImageUrl) {
+          setIsImageModalVisible(true);
+          setClickedApartmentImage("/apartments-cards/apartment-card-1.jpeg");
+        }
+      };
+
+      const closeImageModal = () => {
+        setIsImageModalVisible(false);
+        setClickedApartmentImage(undefined);
+      };
+
     useEffect(() => {
         if (mountRef.current && !apartmentsLoading && apartments) {
             // Set up the scene
@@ -110,14 +125,30 @@ const View3D: React.FC = () => {
             controls.enablePan = false;
 
             const groundGeometry = new THREE.CircleGeometry(100, 32);
+
+            // Load the texture for the ground
+            const textureLoaderGround = new THREE.TextureLoader();
+            const groundTexture = textureLoaderGround.load('ground-texture.jpg'); // Replace with the actual path to your texture file
+
+            // Set texture wrapping and repeat
+            groundTexture.wrapS = THREE.RepeatWrapping;
+            groundTexture.wrapT = THREE.RepeatWrapping;
+            groundTexture.repeat.set(32, 32); // Adjust the repetition to your liking
+
+            // Create the ground material with the texture applied
             const groundMaterial = new THREE.MeshStandardMaterial({
-                color: 0x808080,
+                map: groundTexture,
+                color: 0x808080, // This color will blend with the texture
                 roughness: 0.8,
                 metalness: 0.2,
             });
+
+            // Create the ground mesh
             const ground = new THREE.Mesh(groundGeometry, groundMaterial);
             ground.rotation.x = -Math.PI / 2;
-            ground.position.y = -2;
+            ground.position.y = 0;
+
+            // Add the ground to the scene
             scene.add(ground);
             
             const textureLoader360 = new THREE.TextureLoader();
@@ -158,7 +189,7 @@ const View3D: React.FC = () => {
             camera.updateProjectionMatrix();
 
             // Set the size of the renderer
-            const width = 800;
+            const width = 900;
             const height = 600;
             renderer.setSize(width, height);
             labelRenderer.setSize(width, height);
@@ -208,14 +239,14 @@ const View3D: React.FC = () => {
             */
 
             const mtlLoader = new MTLLoader();
-            mtlLoader.setPath('/3d-objects/');  // Ustawienie ścieżki do folderu z plikami OBJ i MTL
+            mtlLoader.setPath('/3d-objects/Building/');  // Ustawienie ścieżki do folderu z plikami OBJ i MTL
             mtlLoader.load('OBJMultiv2.mtl', (materials) => {
                 materials.preload();  // Preload materiałów
             
                 // Następnie załaduj plik OBJ z wczytanymi materiałami
                 const objLoader = new OBJLoader();
                 objLoader.setMaterials(materials);  // Przypisz materiały z MTL
-                objLoader.setPath('/3d-objects/');  // Ustaw ścieżkę do folderu z plikiem OBJ
+                objLoader.setPath('/3d-objects/Building/');  // Ustaw ścieżkę do folderu z plikiem OBJ
                 objLoader.load('OBJMultiv2.obj', (object) => {
                     // Kiedy model zostanie załadowany, ustaw jego pozycję i skalę, a następnie dodaj do sceny
                     object.position.set(-4.5, 0, 13);
@@ -395,6 +426,31 @@ const View3D: React.FC = () => {
                 }
             };
 
+            const onMouseClick = (event: MouseEvent) => {
+                const rect = mountRef.current!.getBoundingClientRect();
+                mouse.x = ((event.clientX - rect.left) / width) * 2 - 1;
+                mouse.y = -((event.clientY - rect.top) / height) * 2 + 1;
+              
+                raycaster.setFromCamera(mouse, camera);
+              
+                const buildingNames = ['Building1MultiObject', 'Building2MultiObject', 'Building3MultiObject', 'Building4MultiObject', 'Building5MultiObject'];
+                const buildingObjects = buildingNames.map(name => scene.getObjectByName(name)).filter(Boolean) as THREE.Mesh[];
+              
+                const intersects = raycaster.intersectObjects(buildingObjects);
+              
+                if (intersects.length > 0) {
+                  const intersectedObject = intersects[0].object as THREE.Mesh;
+                  if (intersectedObject instanceof THREE.Mesh) {
+                    const buildingName = intersectedObject.name;
+                    const apartmentData = apartments?.find(apt => apt.ID === buildingIdMap[buildingName]);
+                    openImageModal(apartmentData);
+                    showPopup(event, rect, buildingName);
+                  }
+                } else {
+                  setPopup(prev => ({ ...prev, visible: false }));
+                }
+              };
+
             const resetHoveredPart = (part: THREE.Mesh) => {
                 const materials = Array.isArray(part.material) ? part.material : [part.material];
 
@@ -506,7 +562,7 @@ const View3D: React.FC = () => {
     }, [mountRef, apartments, apartmentsLoading]);
 
     return (
-        <div style={{ position: 'relative', width: '800px', height: '600px' }}>
+        <div style={{ position: 'relative', width: '900px', height: '600px' }}>
             <div ref={mountRef} style={{ width: '100%', height: '100%' }} />
             {isLoading && (
                 <div style={{
@@ -544,6 +600,43 @@ const View3D: React.FC = () => {
                         }} />
                     </div>
                 </div>
+            )}
+            {isImageModalVisible && (
+            <div
+                style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                zIndex: 1000,
+                }}
+            >
+                <div style={{ maxWidth: '80%', maxHeight: '80%' }}>
+                <img
+                    src={clickedApartmentImage}
+                    alt="Apartment"
+                    style={{ maxWidth: '100%', maxHeight: '100%' }}
+                />
+                <div
+                    style={{
+                    position: 'absolute',
+                    top: '10px',
+                    right: '10px',
+                    cursor: 'pointer',
+                    color: 'white',
+                    fontSize: '24px',
+                    }}
+                    onClick={closeImageModal}
+                >
+                    ×
+                </div>
+                </div>
+            </div>
             )}
             {popup.visible && (
                 <div style={{
