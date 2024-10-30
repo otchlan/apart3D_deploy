@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SocialLinks from '@/components/social-media';
 
 export default function Footer() {
@@ -8,9 +9,15 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold tracking-tight">LOGO</h3>
+            <Image
+              src="/apart3D_trans_b.png"
+              alt="APART 3D Logo"
+              width={120} // Adjust the width as needed
+              height={30} // Adjust the height as needed
+              className="object-contain"
+            />
             <p className="text-sm">
-              Designing and building beautiful spaces since 2024.
+              Designing and building beautiful spaces.
             </p>
           </div>
           
@@ -50,6 +57,9 @@ export default function Footer() {
         <div className="mt-8 pt-8 border-t border-purple-500 text-center">
           <p className="text-sm">
             © {new Date().getFullYear()} APART 3D. All rights reserved.
+          </p>
+          <p>
+          Some images on this site were provided by Freepik
           </p>
         </div>
       </div>

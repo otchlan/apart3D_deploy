@@ -16,41 +16,53 @@
 
 
 .container {
-  max-width: 1200px;
+  max-width: 1800px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
 .navContent {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* This remains the same */
   align-items: center;
   padding: 16px 0;
+  width: 100%; /* Ensure full width */
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: -0.5px;
-  color: black;
+  display: flex;
+  align-items: center;
+  margin-right: auto; /* Push everything else to the right */
 }
 
 .navLinks {
   display: flex;
-  gap: 32px;
+  gap: 56px;
+  margin: 0 32px; /* Add some spacing between logo and nav links */
+  font-size: 6rem; /* Adjust font size as needed */
+  letter-spacing: 1.5px; /* Add letter spacing */
+}
+
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Push social links to the right */
 }
 
 .navLink {
+  display: inline-block;
   color: transparent;
   background: none;
   border: none;
-  padding: 8px 12px;
+  padding: 0;
+  margin: 0;
   border-radius: 4px;
   font-size: 1.4rem;
   font-weight: bold;
   cursor: pointer;
   transition: color 0.3s, transform 0.3s, text-shadow 0.3s, -webkit-text-stroke 0.3s;
-  -webkit-text-stroke: 1px ; /* for webkit browsers */
+  -webkit-text-stroke: 1px transparent; /* for webkit browsers */
   text-stroke: 1px white; /* standard property (not widely supported yet) */
 }
 
@@ -85,10 +97,6 @@
   text-stroke: 0px black;
   background-color: #4c51bf;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
-}
-
-.socialLinks {
-  display: block;
 }
 
 .menuButton {

@@ -1,0 +1,38 @@
+/* src/components/footer.module.css */
+
+.footer {
+  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+  padding: 2rem;
+  color: #333;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.footerSection h3,
+.footerSection h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.footerSection p,
+.footerSection a {
+  font-size: 0.875rem;
+  color: #333;
+}
+
+.footerLink {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}

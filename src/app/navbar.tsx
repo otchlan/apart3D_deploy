@@ -1,7 +1,7 @@
-// src/app/navbar.tsx
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image'; // Ensure this import is correct
 import SocialLinks from '@/components/social-media';
 import { Menu } from 'lucide-react';
 import styles from './navbar.module.css';
@@ -20,8 +20,8 @@ export default function Navbar() {
           const textStrokeColor = brightness > 128 ? 'black' : 'white';
           const navLinks = navRef.current.querySelectorAll(`.${styles.navLink}`);
           navLinks.forEach((link) => {
+            // Only use the webkit prefix
             (link as HTMLElement).style.webkitTextStroke = `1px ${textStrokeColor}`;
-            (link as HTMLElement).style.textStroke = `1px ${textStrokeColor}`;
           });
         }
       }
@@ -37,14 +37,22 @@ export default function Navbar() {
       <div className={styles.container}>
         <div className={styles.navContent}>
           <div className={styles.logo}>
-            <Link href="/" className={styles.navLink}>LOGO</Link>
+            <Link href="/" className={styles.navLink}>
+              <Image
+                src="/apart3D_trans_b.png"
+                alt="APART 3D Logo"
+                width={60} // Adjust the width as needed
+                height={20} // Adjust the height as needed
+                className="object-contain"
+              />
+            </Link>
           </div>
           
           <div className={styles.navLinks}>
             <NavButton onClick={() => window.location.href = "/3d"}>3D</NavButton>
-            <NavButton onClick={() => window.location.href = "/apartments"}>Mieszkania</NavButton>
-            <NavButton onClick={() => window.location.href = "/about-us"}>O nas</NavButton>
-            <NavButton onClick={() => window.location.href = "/contact"}>Kontakt</NavButton>
+            <NavButton onClick={() => window.location.href = "/apartments"}>Apartments</NavButton>
+            <NavButton onClick={() => window.location.href = "/about-us"}>About us</NavButton>
+            <NavButton onClick={() => window.location.href = "/contact"}>Contact</NavButton>
           </div>
           
           <div className={styles.socialLinks}>
