@@ -35,7 +35,7 @@ const buildingIdMap: { [key: string]: string } = {
 const View3D: React.FC = () => {
     const mountRef = useRef<HTMLDivElement | null>(null);
     const [isImageModalVisible, setIsImageModalVisible] = useState(false);
-    const [clickedApartmentImage, setClickedApartmentImage] = useState<string | undefined>(undefined);
+    const [clickedApartmentImage, setClickedApartmentImage] = useState<string | undefined>("/apartments-cards/apartment-card-1.jpeg");
     const [isLoading, setIsLoading] = useState(true);
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [popup, setPopup] = useState<{visible: boolean, content: string, position: {x: number, y: number}}>({
@@ -44,7 +44,6 @@ const View3D: React.FC = () => {
         position: {x: 0, y: 0}
     });
     
-
     const { apartments, loading: apartmentsLoading, error } = useApartments();
 
     useEffect(() => {
@@ -99,10 +98,14 @@ const View3D: React.FC = () => {
         return stateColors[state as keyof typeof stateColors] || stateColors.free;
     };
 
-    const openImageModal = (apartmentData: any) => {
-        if (apartmentData && apartmentData.ImageUrl) {
+    const getApartmentImageUrl = (apartmentId: string) => {
+        return `/apartments-cards/apartment-card-${apartmentId}.jpeg`;
+    };
+
+    const openImageModal = (apartmentId: string) => {
+        if (apartmentId) {
           setIsImageModalVisible(true);
-          setClickedApartmentImage("/apartments-cards/apartment-card-1.jpeg");
+          setClickedApartmentImage(getApartmentImageUrl(apartmentId));
         }
       };
 
@@ -443,13 +446,15 @@ const View3D: React.FC = () => {
                   if (intersectedObject instanceof THREE.Mesh) {
                     const buildingName = intersectedObject.name;
                     const apartmentData = apartments?.find(apt => apt.ID === buildingIdMap[buildingName]);
-                    openImageModal(apartmentData);
+                    openImageModal(buildingIdMap[buildingName]);
                     showPopup(event, rect, buildingName);
                   }
                 } else {
                   setPopup(prev => ({ ...prev, visible: false }));
                 }
               };
+
+            window.addEventListener('click', onMouseClick);
 
             const resetHoveredPart = (part: THREE.Mesh) => {
                 const materials = Array.isArray(part.material) ? part.material : [part.material];
