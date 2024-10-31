@@ -59,7 +59,7 @@ const View3D: React.FC = () => {
             })));
         }
     }, [apartments, apartmentsLoading]);
-
+// Arek dupeczka
     const logApartmentData = (buildingName: string) => {
         const buildingId = buildingIdMap[buildingName];
         console.log('Building Name:', buildingName);
