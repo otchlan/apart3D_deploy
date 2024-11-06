@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: transparent; /* Change background to transparent */
+  --background: transparent;
   --foreground: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: transparent; /* Ensure transparency in dark mode as well */
+    --background: transparent;
     --foreground: transparent;
   }
 }
@@ -24,14 +24,25 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
 }
 
 .bg-white {
-  --tw-bg-opacity: 0; /* Set opacity to 0 for transparency */
+  --tw-bg-opacity: 0;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-/* Add this to your global CSS file, e.g., styles/globals.css */
 @keyframes shadowMove {
   0% {
     text-shadow: -20px 0 20px rgba(255, 255, 255, 0.2);

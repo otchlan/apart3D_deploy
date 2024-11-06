@@ -1,21 +1,30 @@
+//src/app/page.tsx
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import Button from '@/components/button';
+import React, { useEffect, useState, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Button from '@/components/button';
 import Carousel from "@/components/carousel";
-import PhotoTextCard from "@/components/photo-text-card";
-import PhotoTextCardLeft from "@/components/photo-text-card-left";
-import View3DSmall from '@/3d/View3DSmall';
+import SlideInSection from '@/components/SlideInSection';
+import SpinningDoorCard from '@/components/SpinningFeatureCardComponent';
 
+// Dynamically import components
+const View3DSmall = dynamic(() => import('@/3d/View3DSmall'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[400px] flex items-center justify-center bg-gray-100 rounded-lg">
+      <div className="text-gray-600">Loading 3D View...</div>
+    </div>
+  )
+});
+
+// Import static assets
 import image1 from '@/assets/example-image-1.jpg';
 import image2 from '@/assets/example-image-2.jpg';
 import image3 from '@/assets/example-image-3.jpg';
 import image4 from '@/assets/example-image-4.jpg';
 import image5 from '@/assets/example-image-5.jpg';
-
-import SlideInSection from '@/components/SlideInSection';
-import SpinningDoorCard from '@/components/SpinningFeatureCardComponent';
 
 export default function HomePage() {
   const images = [
@@ -54,13 +63,9 @@ export default function HomePage() {
             backgroundRepeat: 'no-repeat',
           }}
         >
-          {/* Overlay to ensure text readability */}
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-
-          {/* Content */}
           <div className="container mx-auto relative z-10">
             <div className="flex flex-col md:flex-row items-center justify-between gap-12 rounded-xl p-8 backdrop-blur-sm" style={{ minHeight: '700px' }}>
-              {/* Left content */}
               <div className="w-full md:w-1/2 space-y-6">
                 <h2 className="text-3xl font-bold text-white">
                   Interactive 3D Experience
@@ -86,11 +91,15 @@ export default function HomePage() {
                   View full 3D tour 
                 </Button>
               </div>
-
-              {/* Right content */}
               <div className="w-full md:w-1/2">
                 <div className="bg-white p-4 rounded-lg shadow-lg">
-                  <View3DSmall />
+                  <Suspense fallback={
+                    <div className="w-full h-[400px] flex items-center justify-center bg-gray-100 rounded-lg">
+                      <div className="text-gray-600">Loading 3D View...</div>
+                    </div>
+                  }>
+                    <View3DSmall />
+                  </Suspense>
                 </div>
               </div>
             </div>
@@ -98,7 +107,7 @@ export default function HomePage() {
         </section>
 
         {/* Features Section */}
-        <section className="bg-white py-20">
+        <section className="bg-gradient-to-br from-purple-300 to-blue-300 text-white py-20">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-semibold text-center text-gray-800 mb-12">Why choose Us</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
