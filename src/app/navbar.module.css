@@ -1,8 +1,6 @@
 /* navbar.module.css */
-
 .navbar {
-  background: rgba(0, 0, 0, 0.5); /* 40% opaque white */
-  background: rgba(0, 0, 0, 0.5); /* Fallback for browsers that don't support backdrop-filter */
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   color: black;
@@ -14,7 +12,6 @@
   z-index: 1000;
 }
 
-
 .container {
   max-width: 1800px;
   margin: 0 auto;
@@ -23,34 +20,34 @@
 
 .navContent {
   display: flex;
-  justify-content: space-between; /* This remains the same */
+  justify-content: space-between;
   align-items: center;
   padding: 16px 0;
-  width: 100%; /* Ensure full width */
+  width: 100%;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  margin-right: auto; /* Push everything else to the right */
+  margin-right: auto;
 }
 
 .navLinks {
   display: flex;
   gap: 56px;
-  margin: 0 32px; /* Add some spacing between logo and nav links */
-  font-size: 6rem; /* Adjust font size as needed */
-  letter-spacing: 1.5px; /* Add letter spacing */
+  margin: 0 32px;
+  font-size: 1.4rem;
+  letter-spacing: 1.5px;
 }
-
 
 .socialLinks {
   display: flex;
   align-items: center;
-  margin-left: auto; /* Push social links to the right */
+  margin-left: auto;
 }
 
-.navLink {
+.navLink,
+.mobileNavLink {
   display: inline-block;
   color: transparent;
   background: none;
@@ -62,54 +59,50 @@
   font-weight: bold;
   cursor: pointer;
   transition: color 0.3s, transform 0.3s, text-shadow 0.3s, -webkit-text-stroke 0.3s;
-  -webkit-text-stroke: 1px transparent; /* for webkit browsers */
-  text-stroke: 1px white; /* standard property (not widely supported yet) */
+  -webkit-text-stroke: 1px white;
+  text-stroke: 1px white;
 }
 
-.navLink:hover {
+.navLink:hover,
+.mobileNavLink:hover {
   color: #ffffff;
-  -webkit-text-stroke: 0px white; /* remove stroke on hover */
+  -webkit-text-stroke: 0px white;
   text-stroke: 0px white;
   transform: scale(1.05);
   text-shadow: 0 0 10px rgba(246, 135, 179, 0.8), 0 0 20px rgba(246, 135, 179, 0.6), 0 0 30px rgba(246, 135, 179, 0.4);
 }
 
-.mobileNavLink {
-  color: transparent;
-  background: none;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: color 0.3s, background-color 0.3s, text-shadow 0.3s, -webkit-text-stroke 0.3s;
-  display: block;
-  width: 100%;
-  text-align: left;
-  -webkit-text-stroke: 1px black; /* for webkit browsers */
-  text-stroke: 1px black; /* standard property (not widely supported yet) */
-}
-
-.mobileNavLink:hover {
-  color: #ffffff;
-  -webkit-text-stroke: 0px black; /* remove stroke on hover */
-  text-stroke: 0px black;
-  background-color: #4c51bf;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
-}
-
 .menuButton {
   display: none;
-  color: black;
-  background: none;
-  border: none;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.menuButton:before {
+  content: '☰';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .menuButton:hover {
-  color: #f687b3;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(246, 135, 179, 0.5);
+}
+
+.menuButtonOpen {
+  background: rgba(255, 255, 255, 0.4); /* Adjust this for active state */
 }
 
 .mobileMenu {
@@ -118,38 +111,35 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: white;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.mobileNavLink {
-  color: black;
-  background: none;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: block;
-  width: 100%;
-  text-align: left;
-}
-
-.mobileNavLink:hover {
-  background-color: #4c51bf;
 }
 
 @media (max-width: 768px) {
   .navLinks {
     display: none;
   }
+  
   .menuButton {
     display: block;
   }
+  
   .mobileMenu {
     display: block;
+  }
+  
+  .mobileNavLink {
+    padding: 16px 12px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .socialLinks {
+    justify-content: center;
+    margin: 16px auto;
+    gap: 24px;
   }
 }

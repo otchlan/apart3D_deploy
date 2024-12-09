@@ -37,7 +37,7 @@ const SlideInSection: React.FC<SlideInSectionProps> = ({ children, className = "
       <div className="absolute inset-0 bg-black bg-opacity-40" />
       
       {/* Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 text-white">
         {children}
       </div>
     </motion.section>

@@ -1,0 +1,1322 @@
+# Blender 4.3.0 MTL File: 'None'
+# www.blender.org
+
+newmtl !@#_-_PASY_MIEJSC_POSTOJOWYCH_
+Ns 38.560009
+Ka 1.000000 1.000000 1.000000
+Kd 0.254118 0.254118 0.254118
+Ks 0.685403 0.685403 0.685403
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl !@#_-_Tynk_-_Biały_gładki__PASKI_
+Ns 0.160000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/250_clean plaster texture-seamless.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/250_clean plaster texture-seamless.jpg
+
+newmtl #0_-_A_DACH_OBRÓBKA_
+Ns 0.919999
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Asfalt jasny cb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Asfalt jasny cb -opt.jpg
+
+newmtl #0_-_FARBA_WIATA_ŚMIETNIKOWA_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.073961 0.073961 0.073961
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #0_-_WNĘTRZE_WYKONCZENIE_
+Ns 38.560009
+Ka 1.000000 1.000000 1.000000
+Kd 0.237647 0.237647 0.222353
+Ks 0.685403 0.685403 0.685403
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #0_-_kinkient_zewnętzny__(światło)_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.410000 0.410000 0.410000
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_-_BARIERKA_LEKKA_PRZY_SKARPIE
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.205804 0.205804 0.410000
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_-_BUDYNKI_OTOCZENIE
+Ns 38.560009
+Ka 1.000000 1.000000 1.000000
+Kd 0.300000 0.300000 0.300000
+Ks 0.685403 0.685403 0.685403
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_-_KRATKA_DESZCZOWA_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.096471 0.096471 0.096471
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_-_NAPISY_
+Ns 38.560009
+Ka 1.000000 1.000000 1.000000
+Kd 0.300000 0.300000 0.300000
+Ks 0.685403 0.685403 0.685403
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_-_PARAPET_BUDYNEK_USŁUGOWY_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.205804 0.205804 0.205804
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_-_SZARY_TYNK_USŁUGOWY_PRZY__WEJSCIU
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.114157 0.114157 0.114157
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_-_Szkło_-_BALUSTRADA_
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Kd 0.992157 0.992157 0.992157
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.780000
+illum 9
+
+newmtl #_-__BALUSTRADA_(_KOLOR_STALOWYCH)_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.065922 0.070745 0.075569
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_GRAFITOWE_RYFLE_PRZY_GŁÓWNYM_WEJŚCIU_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.123804 0.123804 0.123804
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_Metal_-ALCOBOND
+Ns 12.000001
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/(6) _ 36_aluminium metal facade cladding texture-seamless kopia.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/(6) _ 36_aluminium metal facade cladding texture-seamless kopia.jpg
+
+newmtl *12_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.400000 0.400000 0.400000
+Ks 0.400000 0.400000 0.400000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl *15_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.100000 0.100000 0.100000
+Ks 0.100000 0.100000 0.100000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl *8_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.343137 0.343137 0.343137
+Ks 0.343137 0.343137 0.343137
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0#_-_PASKI_MIEJSC_POSTOJOWYCH
+Ns 38.560009
+Ka 1.000000 1.000000 1.000000
+Kd 0.300000 0.300000 0.300000
+Ks 0.685403 0.685403 0.685403
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0020_Red_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.500000 0.000000 0.000000
+Ks 0.166667 0.166667 0.166667
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0039_DarkOrange_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.500000 0.274510 0.000000
+Ks 0.258170 0.258170 0.258170
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0057_DarkKhaki_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.274510 0.264706 0.154902
+Ks 0.231373 0.231373 0.231373
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0100_SteelBlue_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.137255 0.254902 0.350980
+Ks 0.247712 0.247712 0.247712
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0136_Charcoal_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.068627 0.068627 0.068627
+Ks 0.068627 0.068627 0.068627
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0_-_BALUSTRADY
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.065922 0.070745 0.075569
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0_-_OKNA_STAL_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.073961 0.073961 0.073961
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0_-_OKNA_STOLARKA_(_GRAFIT)
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.073961 0.073961 0.073961
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0_-_Tynk_-_Biały_gładki_-_BALKONY_
+Ns 0.160000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/250_clean plaster texture-seamless.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/250_clean plaster texture-seamless.jpg
+
+newmtl 0_-_Tynk_-_SZARY_GRAFIT
+Ns 0.160000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/166_concrete bare clean texture-seamless.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/166_concrete bare clean texture-seamless.jpg
+
+newmtl 0__-_SCIANY_WEWNETRZ
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.410000 0.410000 0.410000
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <LightGray>1_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.329412 0.329412 0.329412
+Ks 0.329412 0.329412 0.329412
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>10_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.400000 0.000000
+Ks 0.133333 0.133333 0.133333
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>11_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.400000 0.000000 0.000000
+Ks 0.133333 0.133333 0.133333
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>12_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.025490 0.025490 0.025490
+Ks 0.025490 0.025490 0.025490
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>13_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.317647 0.317647 0.317647
+Ks 0.317647 0.317647 0.317647
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>15_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.107843 0.107843 0.107843
+Ks 0.107843 0.107843 0.107843
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>16_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.019608 0.019608 0.019608
+Ks 0.019608 0.019608 0.019608
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>1_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.043137 0.043137 0.043137
+Ks 0.043137 0.043137 0.043137
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>2_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.400000 0.400000 0.080392
+Ks 0.293464 0.293464 0.293464
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>5_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.282353 0.282353 0.282353
+Ks 0.282353 0.282353 0.282353
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>7_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.364706 0.364706 0.364706
+Ks 0.364706 0.364706 0.364706
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>8_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.400000
+Ks 0.133333 0.133333 0.133333
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>9_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.400000 0.101961 0.000000
+Ks 0.167320 0.167320 0.167320
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl <auto>_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.200000 0.200000 0.200000
+Ks 0.200000 0.200000 0.200000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl BENCH_METAL1_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.092157 0.100000 0.100000
+Ks 0.097386 0.097386 0.097386
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Beton_-_02
+Ns 10.999996
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 02 -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 02 -opt.jpg
+
+newmtl Beton_-_04
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 04 cb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 04 cb -opt.jpg
+
+newmtl Beton_-_08_25
+Ns 0.999999
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 08 cb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 08 cb -opt.jpg
+
+newmtl Beton_-_10_25
+Ns 0.999999
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 10 c -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 10 c -opt.jpg
+
+newmtl Beton_-_20_25
+Ns 10.999996
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 20 b -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - 20 b -opt.jpg
+
+newmtl Beton_-_ciemny_25
+Ns 2.600003
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - Ciemny węglowy -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Beton - Ciemny węglowy -opt.jpg
+
+newmtl Cegła_-_Kolor_powierzchni
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Cegła - Kolor powierzchni -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Cegła - Kolor powierzchni -opt.jpg
+
+newmtl Chodnik_-_Asfalt_jasny
+Ns 0.919999
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Asfalt jasny cb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Asfalt jasny cb -opt.jpg
+
+newmtl Chodnik_-_Kamienie_13_25
+Ns 4.200001
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Kamienie 13 cb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Kamienie 13 cb -opt.jpg
+
+newmtl Chodnik_-_Kamień_07_25
+Ns 3.800000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Kamienie 07 crb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Kamienie 07 crb -opt.jpg
+
+newmtl Chodnik_-_Płyty_chodnikowe_ażurowe_25_(1)
+Ns 7.000004
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Płyty perforowane cbgr -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Chodnik - Płyty perforowane cbgr -opt.jpg
+
+newmtl Color_000_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.500000 0.500000 0.500000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_005_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.223529 0.223529 0.223529
+Ks 0.223529 0.223529 0.223529
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_009_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+
+newmtl Color_A08_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.200000 0.000000 0.000000
+Ks 0.066667 0.066667 0.066667
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_B03_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.500000 0.274510 0.198039
+Ks 0.324183 0.324183 0.324183
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_D04_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.500000 0.400000 0.098039
+Ks 0.332680 0.332680 0.332680
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_D05_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.500000 0.374510 0.000000
+Ks 0.291503 0.291503 0.291503
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_D24_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.100000 0.088235 0.058823
+Ks 0.082353 0.082353 0.082353
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_E04_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.500000 0.500000 0.098039
+Ks 0.366013 0.366013 0.366013
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_J05_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.249020 0.000000 0.500000
+Ks 0.249673 0.249673 0.249673
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_L11_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.300000 0.000000 0.149020
+Ks 0.149673 0.149673 0.149673
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Color_M06_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.188235 0.188235 0.188235
+Ks 0.188235 0.188235 0.188235
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Dach_-_Rąbek_stojący_naturalna_25
+Ns 0.999999
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Dach - Rąbek stojący naturalna -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Dach - Rąbek stojący naturalna -opt.jpg
+
+newmtl Default_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.500000 0.464706 0.239216
+Ks 0.401307 0.401307 0.401307
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Drewno_-_Dąb_jasny
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Drewno - Dąb jasny -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Drewno - Dąb jasny -opt.jpg
+
+newmtl Farba_-_Antracyt
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.073961 0.073961 0.073961
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Beż_piaskowy
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.339255 0.319961 0.274941
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Biel_błyszcząca
+Ns 38.560009
+Ka 1.000000 1.000000 1.000000
+Kd 0.300000 0.300000 0.300000
+Ks 0.685403 0.685403 0.685403
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Biel_tytanowa
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.410000 0.410000 0.410000
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_CIEMNA_BLACHA
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.160784 0.160784 0.160784
+Ks 0.357601 0.357601 0.357601
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Ciemnoszary
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.146314 0.146314 0.146314
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Czerń_krucza
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.357601 0.357601 0.357601
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Jasna_szarość
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.270118 0.270118 0.270118
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_KOLOR_BONIOWANIA_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.030549 0.030549 0.030549
+Ks 0.357601 0.357601 0.357601
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Ochra_złocista
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.328000 0.225098 0.080392
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Zieleń_lasu
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.053059 0.239569 0.048235
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Żółcień_kadmowa
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.405176 0.403569 0.000000
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Kamieniarka,_kamień_-_Żwir_25
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamieniarka - żwir -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamieniarka - żwir -opt.jpg
+
+newmtl Kamień_-_Granit_szary
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamień - Granit szary -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamień - Granit szary -opt.jpg
+
+newmtl Kamień_-_Marmur_Carrara_Biel
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamień - Marmur karraryjski biały -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamień - Marmur karraryjski biały -opt.jpg
+
+newmtl Kamień_-_Marmur_różowy
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamień - Marmur różowy -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamień - Marmur różowy -opt.jpg
+
+newmtl Kamień_-_Piaskowiec_01
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamień - Piaskowiec 01 -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kamień - Piaskowiec 01 -opt.jpg
+
+newmtl Kora_-_02_25
+Ns 4.999998
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kora - 02 cb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Kora - 02 cb -opt.jpg
+
+newmtl Kuning_Doff_123_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_127.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_127.jpg
+
+newmtl Kuning_Glossy_114_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_118.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_118.jpg
+
+newmtl Lighter_brown_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.119608 0.090196 0.096078
+Ks 0.101961 0.101961 0.101961
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Linoleum_-_Szare
+Ns 2.600003
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Linoleum - Szare -pot.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Linoleum - Szare -pot.jpg
+
+newmtl Metal_-_Cynk
+Ns 10.999996
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Metal - Cynk -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Metal - Cynk -opt.jpg
+
+newmtl Metal_-_Perforowany_małe_kółka
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Metal - Arkusz perforacje małe ba -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Metal - Arkusz perforacje małe ba -opt.jpg
+
+newmtl Metal_-_Stal
+Ns 6.199997
+Ka 1.000000 1.000000 1.000000
+Kd 0.210196 0.221176 0.222745
+Ks 0.373529 0.373529 0.373529
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Metal_-_Stal_nierdzewna
+Ns 13.000001
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Metal - Stal nierdzewna -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Metal - Stal nierdzewna -opt.jpg
+
+newmtl Metal_-_Żeliwo
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Metal - Żelazo -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Metal - Żelazo -opt.jpg
+
+newmtl Natura_-_Zielony_Dach_25
+Ns 0.280001
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Natura - Zielony dach crb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Natura - Zielony dach crb -opt.jpg
+
+newmtl Navy_Glossy_132_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_136.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_136.jpg
+
+newmtl Niraj_Hair_Gray_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.349020 0.349020 0.349020
+Ks 0.349020 0.349020 0.349020
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Okładzina_elewacyjna_-_średnia
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Deska elewacyjna - średnia -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Deska elewacyjna - średnia -opt.jpg
+
+newmtl Oren_Glossy_109_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_113.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_113.jpg
+
+newmtl Oren_Tua_Glossy_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.498039 0.225490 0.092157
+Ks 0.271895 0.271895 0.271895
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl PMI_Blue_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.156863 0.323529
+Ks 0.160131 0.160131 0.160131
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl PMI_Red1_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.419608 0.045098 0.098039
+Ks 0.187582 0.187582 0.187582
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl PMI_White1_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.494118 0.490196 0.429412
+Ks 0.471242 0.471242 0.471242
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl PlayMartBrown_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.101961 0.074510 0.078431
+Ks 0.084967 0.084967 0.084967
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl PlayMartTan1_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.388235 0.321569 0.241176
+Ks 0.316993 0.316993 0.316993
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl PlayMartTan_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.388235 0.321569 0.243137
+Ks 0.317647 0.317647 0.317647
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Podłoga_deski_-_03
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Deski podłogowe - 03 -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Deski podłogowe - 03 -opt.jpg
+
+newmtl Powietrze
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.000000
+illum 1
+
+newmtl Płytki_-_Jasne_szare_60x60_25
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Płytki - Jasno szare 60x60 -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Płytki - Jasno szare 60x60 -opt.jpg
+
+newmtl Płytki_-_ciemne_25x25
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Płytki - Ciemne 25x25 -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Płytki - Ciemne 25x25 -opt.jpg
+
+newmtl Płytki_-_ciemne_30x30
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Płytki - Ciemne 30x30 -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Płytki - Ciemne 30x30 -opt.jpg
+
+newmtl RSP_TAN_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.313725 0.254902 0.176471
+Ks 0.248366 0.248366 0.248366
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl SKP_[Color_006]_def7bb55_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.168627 0.168627 0.168627
+Ks 0.168627 0.168627 0.168627
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Szkło_-_Czyste_Szybkie
+Ns 79.520004
+Ka 1.000000 1.000000 1.000000
+Kd 0.564706 0.581176 0.571765
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.310000
+illum 9
+
+newmtl Trawa_-_brązowy
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Trawa - Brązowa cb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Trawa - Brązowa cb -opt.jpg
+
+newmtl Tynk_szlachetny_-_Biały_gładki
+Ns 0.160000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Tynk szlachetny - Biały gładki c -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Tynk szlachetny - Biały gładki c -opt.jpg
+
+newmtl Tynk_szlachetny_-_Żółty_matowy
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Tynk szlachetny - żółty szorstki cb -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Tynk szlachetny - żółty szorstki cb -opt.jpg
+
+newmtl Woda_-_Staw
+Ns 0.640001
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Woda - Staw -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Woda - Staw -opt.jpg
+
+newmtl Wood_Cherry_Original_180_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_181.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_181.jpg
+
+newmtl Wood_Cherry_Original_81_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_82.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_82.jpg
+
+newmtl Wood_Cherry_Original_81_1_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_82_1.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_82_1.jpg
+
+newmtl Wood_Veneer_02_152_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_153.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_153.jpg
+
+newmtl Wood_Veneer_02_182_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_183.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Texture_183.jpg
+
+newmtl Zieleń_-_Liście_drzewa_małe
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.770000
+illum 9
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Zieleń - Liście drzewa małe cbadp -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Zieleń - Liście drzewa małe cbadp -opt.jpg
+
+newmtl Zieleń_-_Żywopłot_25
+Ns 4.599998
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.770000
+illum 9
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Zieleń - Żywopłot cbadp -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Zieleń - Żywopłot cbadp -opt.jpg
+
+newmtl Ziemia_-_brązowy
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Grunt - Brązowy -opt.jpg
+map_Ks MODEL - (DER.MODEL CALOSC)_(3)_Tekstury/Grunt - Brązowy -opt.jpg
+
+newmtl [0056_Yellow]1_(utworzony_przy_konwersji_obiektu)
+Ns 3.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.500000 0.500000 0.000000
+Ks 0.333333 0.333333 0.333333
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2

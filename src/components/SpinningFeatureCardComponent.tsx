@@ -5,9 +5,10 @@ import styles from './SpinningFeatureCard.module.css';
 interface SpinningDoorCardProps {
   title: string;
   description: string;
+  className?: string; // Add this line
 }
 
-const SpinningDoorCard: React.FC<SpinningDoorCardProps> = ({ title, description }) => {
+const SpinningDoorCard: React.FC<SpinningDoorCardProps> = ({ title, description, className }) => {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
@@ -34,7 +35,7 @@ const SpinningDoorCard: React.FC<SpinningDoorCardProps> = ({ title, description 
   }, []);
 
   return (
-    <div ref={cardRef} className={`${styles.spinningCard} perspective-1000`}>
+    <div ref={cardRef} className={`${styles.spinningCard} perspective-1000 ${className}`}>
       <div className={`${styles.spinningCardInner} transform-preserve-3d ${isVisible ? styles.rotateY180 : ''}`}>
         <div className={`${styles.spinningCardFront} backface-hidden`}>
           <div className={styles.spinningCardContent}>

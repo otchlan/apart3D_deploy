@@ -11,27 +11,27 @@ export default function Footer() {
           <div className="space-y-4">
             <Image
               src="/apart3D_trans_b.png"
-              alt="APART 3D Logo"
-              width={120} // Adjust the width as needed
-              height={30} // Adjust the height as needed
+              alt="Logo APART 3D"
+              width={120} // Dopasuj szerokość w razie potrzeby
+              height={30} // Dopasuj wysokość w razie potrzeby
               className="object-contain"
             />
             <p className="text-sm">
-              Designing and building beautiful spaces.
+              Projektowanie i budowanie pięknych przestrzeni.
             </p>
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-4"></h4>
             <ul className="space-y-2">
-              <FooterLink href="/">Home</FooterLink>
+              <FooterLink href="/">Strona główna</FooterLink>
               <FooterLink href="/3d">3D</FooterLink>
-              <FooterLink href="/portfolio">About us</FooterLink>
+              <FooterLink href="/portfolio">O nas</FooterLink>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+            <h4 className="text-lg font-semibold mb-4">Kontakt</h4>
             <address className="not-italic text-sm space-y-2">
               <p>mstachura@deeptechlabs.pl</p>
               <p>+48 791 358 08(6+3)</p>
@@ -42,24 +42,24 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="text-white font-bold hover:text-pink-300 transition duration-300 ease-in-out shadow-animation"
                 >
-                  Schedule a call
+                  Umów się na rozmowę
                 </a>
               </p>
             </address>
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
+            <h4 className="text-lg font-semibold mb-4">Obserwuj nas</h4>
             <SocialLinks />
           </div>
         </div>
         
         <div className="mt-8 pt-8 border-t border-purple-500 text-center">
           <p className="text-sm">
-            © {new Date().getFullYear()} APART 3D. All rights reserved.
+            © {new Date().getFullYear()} APART 3D. Wszelkie prawa zastrzeżone.
           </p>
           <p>
-          Some images on this site were provided by Freepik
+            Niektóre zdjęcia na tej stronie zostały udostępnione przez Freepik.
           </p>
         </div>
       </div>

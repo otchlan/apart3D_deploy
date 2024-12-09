@@ -1,9 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image'; // Ensure this import is correct
+import Image from 'next/image'; 
 import SocialLinks from '@/components/social-media';
-import { Menu } from 'lucide-react';
 import styles from './navbar.module.css';
 
 export default function Navbar() {
@@ -20,7 +19,6 @@ export default function Navbar() {
           const textStrokeColor = brightness > 128 ? 'black' : 'white';
           const navLinks = navRef.current.querySelectorAll(`.${styles.navLink}`);
           navLinks.forEach((link) => {
-            // Only use the webkit prefix
             (link as HTMLElement).style.webkitTextStroke = `1px ${textStrokeColor}`;
           });
         }
@@ -41,30 +39,31 @@ export default function Navbar() {
               <Image
                 src="/apart3D_trans_b.png"
                 alt="APART 3D Logo"
-                width={60} // Adjust the width as needed
-                height={20} // Adjust the height as needed
+                width={60} 
+                height={20} 
                 className="object-contain"
               />
             </Link>
           </div>
           
           <div className={styles.navLinks}>
-            <NavButton onClick={() => window.location.href = "/3d"}>3D</NavButton>
-            <NavButton onClick={() => window.location.href = "/apartments"}>Apartments</NavButton>
-            <NavButton onClick={() => window.location.href = "/about-us"}>About us</NavButton>
-            <NavButton onClick={() => window.location.href = "/contact"}>Contact</NavButton>
+            <NavButton onClick={() => window.location.href = "/"}>Strona główna</NavButton>          
+            <NavButton onClick={() => window.location.href = "/3d"}>Apartamenty</NavButton>
+            <NavButton onClick={() => window.location.href = "/about-us"}>O nas</NavButton>
+            <NavButton onClick={() => window.location.href = "/contact"}>Kontakt</NavButton>
           </div>
           
           <div className={styles.socialLinks}>
             <SocialLinks />
           </div>
           
+          {/* Ensure this button only appears on mobile view */}
           <div>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={styles.menuButton}
+              className={`${styles.menuButton} ${isOpen ? styles.menuButtonOpen : ''}`}
             >
-              <Menu size={24} />
+              
             </button>
           </div>
         </div>
@@ -73,16 +72,10 @@ export default function Navbar() {
       {isOpen && (
         <div className={styles.mobileMenu}>
           <div>
-            <MobileNavButton onClick={() => window.location.href = "/"}>Home</MobileNavButton>
-            <MobileNavButton onClick={() => window.location.href = "/3d"}>3D</MobileNavButton>
-            <MobileNavButton onClick={() => window.location.href = "/apartments"}>Mieszkania</MobileNavButton>
+            <MobileNavButton onClick={() => window.location.href = "/"}>Strona główna</MobileNavButton>
+            <MobileNavButton onClick={() => window.location.href = "/3d"}>Mieszkania</MobileNavButton>
             <MobileNavButton onClick={() => window.location.href = "/about-us"}>O nas</MobileNavButton>
             <MobileNavButton onClick={() => window.location.href = "/contact"}>Kontakt</MobileNavButton>
-            <MobileNavButton onClick={() => window.location.href = "/example"}>Example</MobileNavButton>
-            <MobileNavButton onClick={() => window.location.href = "/localisation"}>Lokalizacja</MobileNavButton>
-          </div>
-          <div>
-            <SocialLinks />
           </div>
         </div>
       )}

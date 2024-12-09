@@ -6,34 +6,24 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import useApartments from '@/hooks/useApartments';
-
-interface StateColors {
-    FREE: number;
-    RESERVED: number;
-    SOLD: number;
-    [key: string]: number;
-}
-
-const stateColors: StateColors = {
-    FREE: 0x00ff00,     // Green
-    RESERVED: 0xffa500, // Orange
-    SOLD: 0xff0000      // Red
-};
+import { StateColors, BuildingIdMap, PopupState } from './3DViewType';
+import { STATE_COLORS, BUILDING_ID_MAP } from './3DViewConfiguration';
+import { getApartmentState, getHoverColor, isMaterialWithColor, setHoveredPart, resetHoveredPart } from './3DViewUtilities';
+import View3DLoading from './3DViewLoadingScreen';
+import View3DImageModal from './3dViewImageModal';
 
 
-const buildingIdMap: { [key: string]: string } = {
-    'Building1MultiObject': '1',
-    'Building2MultiObject': '2',
-    'Building3MultiObject': '3',
-    'Building4MultiObject': '4',
-    'Building5MultiObject': '5'
-};
+const stateColors = STATE_COLORS;
+
+const buildingIdMap = BUILDING_ID_MAP;
 
 
 
 
 const View3D: React.FC = () => {
     const mountRef = useRef<HTMLDivElement | null>(null);
+    const [isImageModalVisible, setIsImageModalVisible] = useState(false);
+    const [clickedApartmentImage, setClickedApartmentImage] = useState<string | undefined>("/apartments-cards/apartment-card-1.jpeg");
     const [isLoading, setIsLoading] = useState(true);
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [popup, setPopup] = useState<{visible: boolean, content: string, position: {x: number, y: number}}>({
@@ -42,6 +32,8 @@ const View3D: React.FC = () => {
         position: {x: 0, y: 0}
     });
 
+    const [activeView, setActiveView] = useState<'all' | 'available' | 'sold' | 'reserved'>('sold');
+    
     const { apartments, loading: apartmentsLoading, error } = useApartments();
 
     useEffect(() => {
@@ -67,34 +59,22 @@ const View3D: React.FC = () => {
         console.log('Found Apartment:', apartment);
     };
 
-    const getApartmentState = (buildingName: string): string => {
-        if (!apartments || apartmentsLoading || error) {
-            console.log('Apartments not loaded or error:', { apartmentsLoading, error });
-            return 'free';
-        }
-        
-        const buildingId = buildingIdMap[buildingName];
-        const apartment = apartments.find(apt => apt.ID === buildingId);
-        
-        // Log for debugging
-        logApartmentData(buildingName);
-        
-        if (!apartment) {
-            console.log('No apartment found for building:', buildingName);
-            return 'free';
-        }
 
-        // Make sure we're using uppercase state values
-        const state = apartment.ApartmentState?.toUpperCase() || 'free';
-        console.log('Apartment State:', state);
-        return state;
+    const getApartmentImageUrl = (apartmentId: string) => {
+        return `/apartments-cards/apartment-card-${apartmentId}.jpeg`;
     };
 
-    const getHoverColor = (buildingName: string): number => {
-        const state = getApartmentState(buildingName);
-        console.log('Getting hover color for state:', state);
-        return stateColors[state as keyof typeof stateColors] || stateColors.free;
-    };
+    const openImageModal = (apartmentId: string) => {
+        if (apartmentId) {
+          setIsImageModalVisible(true);
+          setClickedApartmentImage(getApartmentImageUrl(apartmentId));
+        }
+      };
+
+      const closeImageModal = () => {
+        setIsImageModalVisible(false);
+        setClickedApartmentImage(undefined);
+      };
 
     useEffect(() => {
         if (mountRef.current && !apartmentsLoading && apartments) {
@@ -110,15 +90,31 @@ const View3D: React.FC = () => {
             controls.enablePan = false;
 
             const groundGeometry = new THREE.CircleGeometry(100, 32);
+
+            // Load the texture for the ground
+            const textureLoaderGround = new THREE.TextureLoader();
+            const groundTexture = textureLoaderGround.load('ground-texture.jpg'); // Replace with the actual path to your texture file
+
+            // Set texture wrapping and repeat
+            groundTexture.wrapS = THREE.RepeatWrapping;
+            groundTexture.wrapT = THREE.RepeatWrapping;
+            groundTexture.repeat.set(32, 32); // Adjust the repetition to your liking
+
+            // Create the ground material with the texture applied
             const groundMaterial = new THREE.MeshStandardMaterial({
-                color: 0x808080,
+                map: groundTexture,
+                color: 0x808080, // This color will blend with the texture
                 roughness: 0.8,
                 metalness: 0.2,
             });
+
+            // Create the ground mesh
             const ground = new THREE.Mesh(groundGeometry, groundMaterial);
             ground.rotation.x = -Math.PI / 2;
-            ground.position.y = -2;
-            scene.add(ground);
+            ground.position.y = 0;
+
+            // Add the ground to the scene
+            //scene.add(ground);
             
             const textureLoader360 = new THREE.TextureLoader();
             textureLoader360.load(
@@ -158,7 +154,7 @@ const View3D: React.FC = () => {
             camera.updateProjectionMatrix();
 
             // Set the size of the renderer
-            const width = 800;
+            const width = 900;
             const height = 600;
             renderer.setSize(width, height);
             labelRenderer.setSize(width, height);
@@ -208,18 +204,18 @@ const View3D: React.FC = () => {
             */
 
             const mtlLoader = new MTLLoader();
-            mtlLoader.setPath('/3d-objects/');  // Ustawienie ścieżki do folderu z plikami OBJ i MTL
-            mtlLoader.load('OBJMultiv2.mtl', (materials) => {
+            mtlLoader.setPath('/3d-objects/Buildingv2/');  // Ustawienie ścieżki do folderu z plikami OBJ i MTL
+            mtlLoader.load('MODEL BUDYNKU (OSOBNY MODEL).mtl', (materials) => {
                 materials.preload();  // Preload materiałów
             
                 // Następnie załaduj plik OBJ z wczytanymi materiałami
                 const objLoader = new OBJLoader();
                 objLoader.setMaterials(materials);  // Przypisz materiały z MTL
-                objLoader.setPath('/3d-objects/');  // Ustaw ścieżkę do folderu z plikiem OBJ
-                objLoader.load('OBJMultiv2.obj', (object) => {
+                objLoader.setPath('/3d-objects/Buildingv2/');  // Ustaw ścieżkę do folderu z plikiem OBJ
+                objLoader.load('MODEL BUDYNKU (OSOBNY MODEL)v2.obj', (object) => {
                     // Kiedy model zostanie załadowany, ustaw jego pozycję i skalę, a następnie dodaj do sceny
                     object.position.set(-4.5, 0, 13);
-                    object.scale.set(1, 1, 1);
+                    object.scale.set(2, 2, 2);
                     scene.add(object);
                     setLoadingProgress(100);
                     setIsLoading(false);
@@ -358,10 +354,6 @@ const View3D: React.FC = () => {
             // Raycaster for hover detection
             const raycaster = new THREE.Raycaster();
             const mouse = new THREE.Vector2();
-
-            const isMaterialWithColor = (material: THREE.Material): material is THREE.Material & { color: THREE.Color } => {
-                return 'color' in material && material.color instanceof THREE.Color;
-            };
             
 
             let hoveredPart: THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap> | null = null;
@@ -386,7 +378,7 @@ const View3D: React.FC = () => {
                 if (intersects.length > 0) {
                     const intersectedObject = intersects[0].object as THREE.Mesh;
                     if (intersectedObject instanceof THREE.Mesh) {
-                        setHoveredPart(intersectedObject);
+                        setHoveredPart(intersectedObject, getHoverColor(intersectedObject.name));
                         const buildingName = intersectedObject.name;
                         showPopup(event, rect, buildingName);
                     }
@@ -395,22 +387,34 @@ const View3D: React.FC = () => {
                 }
             };
 
-            const resetHoveredPart = (part: THREE.Mesh) => {
-                const materials = Array.isArray(part.material) ? part.material : [part.material];
+            const onMouseClick = (event: MouseEvent) => {
+                const rect = mountRef.current!.getBoundingClientRect();
+                mouse.x = ((event.clientX - rect.left) / width) * 2 - 1;
+                mouse.y = -((event.clientY - rect.top) / height) * 2 + 1;
+              
+                raycaster.setFromCamera(mouse, camera);
+              
+                const buildingNames = ['Building1MultiObject', 'Building2MultiObject', 'Building3MultiObject', 'Building4MultiObject', 'Building5MultiObject'];
+                const buildingObjects = buildingNames.map(name => scene.getObjectByName(name)).filter(Boolean) as THREE.Mesh[];
+              
+                const intersects = raycaster.intersectObjects(buildingObjects);
+              
+                if (intersects.length > 0) {
+                  const intersectedObject = intersects[0].object as THREE.Mesh;
+                  if (intersectedObject instanceof THREE.Mesh) {
+                    const buildingName = intersectedObject.name;
+                    const apartmentData = apartments?.find(apt => apt.ID === buildingIdMap[buildingName]);
+                    openImageModal(buildingIdMap[buildingName]);
+                    showPopup(event, rect, buildingName);
+                  }
+                } else {
+                  setPopup(prev => ({ ...prev, visible: false }));
+                }
+              };
 
-                materials.forEach((material) => {
-                    if (isMaterialWithColor(material) && part.userData.originalColor !== undefined) {
-                        material.color.set(part.userData.originalColor);
-                    }
-                    if (part.userData.originalOpacity !== undefined) {
-                        material.opacity = part.userData.originalOpacity;
-                        material.transparent = part.userData.originalOpacity < 1;
-                    }
-                });
+            window.addEventListener('click', onMouseClick);
 
-            };
-
-            const setHoveredPart = (part: THREE.Mesh) => {
+            const setHighlightedPart = (part: THREE.Mesh) => {
                 const materials = Array.isArray(part.material) ? part.material : [part.material];
                 const hoverColor = getHoverColor(part.name);
 
@@ -441,6 +445,19 @@ const View3D: React.FC = () => {
 
                 hoveredPart = part;
             };
+
+            const updateAllBuildingColors = () => {
+                const buildingNames = ['Building1MultiObject', 'Building2MultiObject', 'Building3MultiObject', 'Building4MultiObject', 'Building5MultiObject'];
+                buildingNames.forEach(name => {
+                    const building = scene.getObjectByName(name) as THREE.Mesh;
+                    if (building && building instanceof THREE.Mesh) {
+                        setHighlightedPart(building);
+                    }
+                });
+            };
+
+            // Call updateAllBuildingColors whenever activeView changes
+            updateAllBuildingColors();
             
             // Function to show popup
             const showPopup = (event: MouseEvent, rect: DOMRect, buildingName: string) => {
@@ -506,45 +523,75 @@ const View3D: React.FC = () => {
     }, [mountRef, apartments, apartmentsLoading]);
 
     return (
-        <div style={{ position: 'relative', width: '800px', height: '600px' }}>
+        <div style={{
+            position: 'relative',
+            width: '900px',
+            height: '600px',
+            zIndex: 0,
+            pointerEvents: 'auto',
+          }}>
+
+            <div className="absolute top-4 left-4 z-10 flex gap-2 bg-gray-200 bg-opacity-90 rounded-md"
+                style={{backgroundColor: 'rgba(240, 240, 240, 0.5)'}}>
+                <button
+                    onClick={() => {
+                        if (activeView == 'available'){
+                            setActiveView('all')
+                        }
+                        else {
+                            setActiveView('available')
+                        }
+                            
+                    }}
+                    className={`px-4 py-2 rounded-md text-sm font-medium shadow-sm transition-colors
+                        ${activeView === 'available' 
+                            ? 'bg-blue-600 text-white' 
+                            : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+                >
+                    Available
+                </button>
+                <button
+                    onClick={() => {
+                        if (activeView == 'reserved'){
+                            setActiveView('all')
+                        }
+                        else {
+                            setActiveView('reserved')
+                        }
+                    }}
+                    className={`px-4 py-2 rounded-md text-sm font-medium shadow-sm transition-colors
+                        ${activeView === 'reserved' 
+                            ? 'bg-green-600 text-white' 
+                            : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+                >
+                    Reserved
+                </button>
+                <button
+                    onClick={() => {
+                        if (activeView == 'sold'){
+                            setActiveView('all')
+                        }
+                        else {
+                            setActiveView('sold')
+                        }
+                    }}
+                    className={`px-4 py-2 rounded-md text-sm font-medium shadow-sm transition-colors
+                        ${activeView === 'sold' 
+                            ? 'bg-red-600 text-white' 
+                            : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+                >
+                    Sold
+                </button>
+            </div>
+
             <div ref={mountRef} style={{ width: '100%', height: '100%' }} />
             {isLoading && (
-                <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    background: 'rgba(0, 0, 0, 0.7)',
-                    color: 'white',
-                    fontSize: '24px',
-                    zIndex: 1000,
-                }}>
-                    <div>Loading 3D Model...</div>
-                    <div style={{ marginTop: '20px', fontSize: '18px' }}>
-                        {loadingProgress}%
-                    </div>
-                    <div style={{
-                        width: '200px',
-                        height: '20px',
-                        background: '#333',
-                        marginTop: '10px',
-                        borderRadius: '10px',
-                        overflow: 'hidden',
-                    }}>
-                        <div style={{
-                            width: `${loadingProgress}%`,
-                            height: '100%',
-                            background: '#4CAF50',
-                            transition: 'width 0.3s ease-in-out',
-                        }} />
-                    </div>
-                </div>
+                <View3DLoading loadingProgress={loadingProgress} />
             )}
+            {isImageModalVisible && (
+                <View3DImageModal imageUrl={clickedApartmentImage} onClose={closeImageModal} />
+            )}
+
             {popup.visible && (
                 <div style={{
                     color: 'black',

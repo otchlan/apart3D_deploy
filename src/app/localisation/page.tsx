@@ -10,13 +10,17 @@ import locationImage1 from '@/assets/example-image-1.jpg';
 import locationImage2 from '@/assets/example-image-2.jpg';
 import locationImage3 from '@/assets/example-image-3.jpg';
 
+import LocationMap from '@/components/LocationMap';
+
 export default function LocalizationPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-purple-50">
       
+      <LocationMap />
+
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-20 text-center">
+        <section className="container mx-auto px-4 py-20 text-center pt-28">
           <h1 className="text-5xl font-bold text-gray-800 mb-6">Our Prime Locations</h1>
           <p className="text-xl text-gray-600 mb-8">Discover the perfect setting for your new home</p>
           <Button size="large">Explore All Locations</Button>

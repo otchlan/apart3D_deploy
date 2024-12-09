@@ -9,7 +9,7 @@ const ContactPage = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-purple-50">
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-20 text-center">
+        <section className="container mx-auto px-4 py-20 text-center pt-28">
           <h1 className="text-5xl font-bold text-gray-800 mb-6">Get in Touch</h1>
           <p className="text-xl text-gray-600 mb-8">We're here to answer any questions you may have about our apartments.</p>
         </section>
