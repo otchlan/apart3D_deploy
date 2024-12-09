@@ -1,0 +1,242 @@
+# Blender 4.3.0 MTL File: 'None'
+# www.blender.org
+
+newmtl !@#_-_Tynk_-_Biały_gładki__PASKI_
+Ns 0.160000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/250_clean plaster texture-seamless.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/250_clean plaster texture-seamless.jpg
+
+newmtl #0_-_A_DACH_OBRÓBKA_
+Ns 0.919999
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Chodnik - Asfalt jasny cb -opt.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Chodnik - Asfalt jasny cb -opt.jpg
+
+newmtl #0_-_WNĘTRZE_WYKONCZENIE_
+Ns 38.560009
+Ka 1.000000 1.000000 1.000000
+Kd 0.237647 0.237647 0.222353
+Ks 0.685403 0.685403 0.685403
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #0_-_kinkient_zewnętzny__(światło)_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.410000 0.410000 0.410000
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_-_Szkło_-_BALUSTRADA_
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Kd 0.992157 0.992157 0.992157
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.780000
+illum 9
+
+newmtl #_-__BALUSTRADA_(_KOLOR_STALOWYCH)_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.065922 0.070745 0.075569
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl #_GRAFITOWE_RYFLE_PRZY_GŁÓWNYM_WEJŚCIU_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.123804 0.123804 0.123804
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0_-_BALUSTRADY
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.065922 0.070745 0.075569
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0_-_OKNA_STAL_
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.073961 0.073961 0.073961
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0_-_OKNA_STOLARKA_(_GRAFIT)
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.073961 0.073961 0.073961
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl 0_-_Tynk_-_Biały_gładki_-_BALKONY_
+Ns 0.160000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/250_clean plaster texture-seamless.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/250_clean plaster texture-seamless.jpg
+
+newmtl 0_-_Tynk_-_SZARY_GRAFIT
+Ns 0.160000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/166_concrete bare clean texture-seamless.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/166_concrete bare clean texture-seamless.jpg
+
+newmtl 0__-_SCIANY_WEWNETRZ
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.410000 0.410000 0.410000
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Beton_-_02
+Ns 10.999996
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Beton - 02 -opt.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Beton - 02 -opt.jpg
+
+newmtl Beton_-_04
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Beton - 04 cb -opt.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Beton - 04 cb -opt.jpg
+
+newmtl Cegła_-_Kolor_powierzchni
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Cegła - Kolor powierzchni -opt.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Cegła - Kolor powierzchni -opt.jpg
+
+newmtl Drewno_-_Dąb_jasny
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Drewno - Dąb jasny -opt.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Drewno - Dąb jasny -opt.jpg
+
+newmtl Farba_-_Antracyt
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.073961 0.073961 0.073961
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Farba_-_Biel_tytanowa
+Ns 0.720000
+Ka 1.000000 1.000000 1.000000
+Kd 0.410000 0.410000 0.410000
+Ks 0.099334 0.099334 0.099334
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Linoleum_-_Szare
+Ns 2.600003
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Linoleum - Szare -pot.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Linoleum - Szare -pot.jpg
+
+newmtl Płytki_-_ciemne_25x25
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Płytki - Ciemne 25x25 -opt.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Płytki - Ciemne 25x25 -opt.jpg
+
+newmtl Płytki_-_ciemne_30x30
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/70_paving outdoor concrete regular block texture-seamless.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/70_paving outdoor concrete regular block texture-seamless.jpg
+
+newmtl Szkło_-_Czyste_Szybkie
+Ns 79.520004
+Ka 1.000000 1.000000 1.000000
+Kd 0.242353 0.242353 0.242353
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.310000
+illum 9
+
+newmtl Tynk_szlachetny_-_Żółty_matowy
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Tynk szlachetny - żółty szorstki cb -opt.jpg
+map_Ks MODEL BUDYNKU (OSOBNY MODEL)_Tekstury/Tynk szlachetny - żółty szorstki cb -opt.jpg
